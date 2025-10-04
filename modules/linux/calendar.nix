@@ -1,7 +1,8 @@
-{ config, ... }: {
+{ config, stable, ... }: {
   home-manager.users.${config.user} = {
     programs.thunderbird = {
       enable = true;
+      package = stable.thunderbird;
 
       profiles."default".isDefault = true;
 
