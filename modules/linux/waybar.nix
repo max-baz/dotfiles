@@ -99,7 +99,7 @@ in
           format-icons = {
             icon = "<span foreground='#928374'> </span>";
           };
-          format = "{icon}{}";
+          format = "{icon}{text}";
           exec = "${app}/bin/waybar-usbguard";
           return-type = "json";
           on-click = "${app}/bin/waybar-usbguard allow";
@@ -126,7 +126,7 @@ in
           format-icons = {
             icon = "<span foreground='#928374'> </span>";
           };
-          format = "{icon}{}";
+          format = "{icon}{text}";
           exec = "${app}/bin/waybar-mail";
           return-type = "json";
         };
