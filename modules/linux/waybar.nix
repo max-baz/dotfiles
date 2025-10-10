@@ -8,7 +8,6 @@ let
       (writeShellScriptBin "waybar-progress" (builtins.readFile ./bin/waybar-progress))
       (writeShellScriptBin "waybar-recording" (builtins.readFile ./bin/waybar-recording))
       (writeShellScriptBin "waybar-systemd" (builtins.readFile ./bin/waybar-systemd))
-      (writeShellScriptBin "waybar-timewarrior" (builtins.readFile ./bin/waybar-timewarrior))
       (writeShellScriptBin "waybar-usbguard" (builtins.readFile ./bin/waybar-usbguard))
       (writeShellScriptBin "waybar-yubikey" (builtins.readFile ./bin/waybar-yubikey))
       bash
@@ -24,7 +23,6 @@ let
       procps
       progress
       systemd
-      timewarrior
       usbguard
     ];
     buildInputs = [ pkgs.makeWrapper ];
@@ -34,7 +32,6 @@ let
       wrapProgram $out/bin/waybar-progress      --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-recording     --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-systemd       --prefix PATH : $out/bin
-      wrapProgram $out/bin/waybar-timewarrior   --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-usbguard      --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-yubikey       --prefix PATH : $out/bin
     '';
@@ -58,7 +55,6 @@ in
 
         modules-right = [
           "custom/syncthing"
-          "custom/timewarrior"
           "custom/progress"
           "custom/usbguard"
           "custom/yubikey"
@@ -81,12 +77,6 @@ in
         "custom/syncthing" = {
           exec = "${lib.getExe pkgs.waybar-syncthing} --api-key ${config.sops.secrets."syncthing-api-key".path}";
           return-type = "json";
-        };
-
-        "custom/timewarrior" = {
-          exec = "${app}/bin/waybar-timewarrior";
-          return-type = "json";
-          interval = 1;
         };
 
         "custom/progress" = {
@@ -326,7 +316,6 @@ in
 
         #mode,
         #pulseaudio,
-        #custom-timewarrior,
         #custom-usbguard,
         #custom-yubikey,
         #custom-decrypted,
@@ -372,7 +361,6 @@ in
           color: @foreground;
         }
 
-        #custom-timewarrior,
         #custom-decrypted {
           color: @dim;
         }
