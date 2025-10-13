@@ -124,6 +124,24 @@
         };
       };
 
+      jail-ai = super.stdenv.mkDerivation rec {
+        pname = "jail-ai";
+        version = "0.41.1";
+        src = super.fetchurl {
+          url = "https://github.com/cyrinux/${pname}/releases/download/v${version}/${pname}-aarch64-linux";
+          hash = "sha256-WuNz7KPvHs40u/hiIl7AycjXsOlxAJH8VBaT81rpsBg=";
+        };
+        dontUnpack = true;
+        installPhase = ''
+          mkdir -p $out/bin
+          install -Dm755 "$src" "$out/bin/${pname}"
+        '';
+        meta = {
+          platforms = [ "aarch64-linux" ];
+          mainProgram = pname;
+        };
+      };
+
       maximbaz-scripts = pkgs.stdenv.mkDerivation {
         pname = "maximbaz-scripts";
         version = "1.0.0";

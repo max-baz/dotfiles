@@ -17,6 +17,7 @@ command -v eza       &> /dev/null    && alias lm='ll -s=modified'               
 command -v doggo     &> /dev/null    && alias d='doggo'                                            || alias d='dig +nocmd +multiline +noall +answer'
 command -v w3mman    &> /dev/null    && alias man='w3mman'
 command -v pgcli     &> /dev/null    && alias pgcli='env LESS= pgcli'
+command -v jail-ai   &> /dev/null    && alias claude='jail-ai claude'
 
 alias e="$EDITOR"
 alias cp='cp -r --reflink=auto'

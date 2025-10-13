@@ -40,6 +40,7 @@
     inotify-tools
     iptables-nftables-compat
     isync
+    jail-ai
     jq
     just
     kitty
