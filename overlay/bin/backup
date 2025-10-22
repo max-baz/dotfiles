@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SOURCE=".dotfiles .dotfiles-private .ssh .gnupg .zsh_history $XDG_STATE_HOME/wl-clipboard-manager .password-store .password-store-g .mozilla .mail giveffektivt enowise cloud decrypted $XDG_STATE_HOME/pgcli"
+SOURCE=".dotfiles .dotfiles-private .ssh .gnupg .zsh_history $XDG_STATE_HOME/wl-clipboard-manager .password-store .mozilla .mail giveffektivt enowise selfhosting decrypted $XDG_STATE_HOME/pgcli"
 BACKUP_PATH="/run/media/$USER/backup_wd_data"
 BACKUP_DIR="$BACKUP_PATH/$(date +%Y-%m-%d)"
 
