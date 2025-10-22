@@ -17,6 +17,7 @@
     ./flipper.nix
     ./fstrim.nix
     ./i18n.nix
+    ./jail-ai.nix
     ./keyboard.nix
     ./network.nix
     ./network-dmenu.nix

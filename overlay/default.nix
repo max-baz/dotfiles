@@ -126,15 +126,21 @@
 
       jail-ai = super.stdenv.mkDerivation rec {
         pname = "jail-ai";
-        version = "0.41.1";
+        version = "0.45.8";
         src = super.fetchurl {
           url = "https://github.com/cyrinux/${pname}/releases/download/v${version}/${pname}-aarch64-linux";
-          hash = "sha256-WuNz7KPvHs40u/hiIl7AycjXsOlxAJH8VBaT81rpsBg=";
+          hash = "sha256-s/dSDRVyMQJDOv+i1Q6YgnXc3Z4M/LzG4up9C2VnzkI=";
+        };
+        src_ebpf_loader = super.fetchurl {
+          url = "https://github.com/cyrinux/${pname}/releases/download/v${version}/${pname}-ebpf-loader-aarch64-linux";
+          hash = "sha256-f2z9+VesRDqaxkMHwP0vBwNY8xc1h0Q7JP3e+TSigI8=";
         };
         dontUnpack = true;
+        dontStrip = true;
         installPhase = ''
           mkdir -p $out/bin
           install -Dm755 "$src" "$out/bin/${pname}"
+          install -Dm755 "$src_ebpf_loader" "$out/bin/${pname}-ebpf-loader"
         '';
         meta = {
           platforms = [ "aarch64-linux" ];
