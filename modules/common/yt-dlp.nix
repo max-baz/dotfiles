@@ -1,8 +1,8 @@
-{ config, lib, pkgs, unstable, ... }: {
+{ config, lib, pkgs, unstable-small, ... }: {
   home-manager.users.${config.user} = {
     programs.yt-dlp = {
       enable = true;
-      package = unstable.yt-dlp;
+      package = unstable-small.yt-dlp;
       settings = {
         embed-metadata = true;
         sponsorblock-mark = "all";

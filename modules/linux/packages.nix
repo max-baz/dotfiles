@@ -1,4 +1,4 @@
-{ config, pkgs, stable, unstable, waysip, ... }: {
+{ config, pkgs, stable, unstable-small, waysip, ... }: {
   home-manager.users.${config.user}.home.packages = with pkgs; [
     abiword
     asahi-bless
@@ -28,7 +28,7 @@
     gcc
     git
     github-cli
-    unstable.github-copilot-cli
+    unstable-small.github-copilot-cli
     glib
     gnumake
     gnumeric

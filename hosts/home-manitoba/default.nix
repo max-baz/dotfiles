@@ -6,8 +6,8 @@ let
       inherit (config.nixpkgs) config;
     };
   };
-  unstable = { config, pkgs, ... }: {
-    _module.args.unstable = import inputs.unstable {
+  unstable-small = { config, pkgs, ... }: {
+    _module.args.unstable-small = import inputs.unstable-small {
       inherit (pkgs.stdenv.hostPlatform) system;
       inherit (config.nixpkgs) config;
     };
@@ -23,7 +23,7 @@ inputs.nixpkgs.lib.nixosSystem rec {
   modules = [
     globals
     stable
-    unstable
+    unstable-small
     inputs.sops-nix.nixosModules.sops
     inputs.apple-silicon-support.nixosModules.apple-silicon-support
     inputs.maximbaz-private.nixosModules.linux

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }: {
+{ config, lib, pkgs, unstable-small, ... }: {
   home-manager.users.${config.user}.programs.mpv = {
     enable = true;
     scripts = lib.mkIf pkgs.stdenv.isLinux [
@@ -46,7 +46,7 @@
         hwdec = true;
       };
       ytdl_hook = {
-        ytdl_path = "${lib.getExe unstable.yt-dlp}";
+        ytdl_path = "${lib.getExe unstable-small.yt-dlp}";
       };
     };
     bindings = {
