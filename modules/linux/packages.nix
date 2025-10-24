@@ -1,4 +1,4 @@
-{ config, pkgs, stable, unstable-small, waysip, ... }: {
+{ config, pkgs, stable, waysip, ... }: {
   home-manager.users.${config.user}.home.packages = with pkgs; [
     abiword
     asahi-bless
@@ -8,7 +8,6 @@
     cargo
     cargo-outdated
     chromium
-    claude-code
     curlie
     dbmate
     delta
@@ -28,7 +27,6 @@
     gcc
     git
     github-cli
-    unstable-small.github-copilot-cli
     glib
     gnumake
     gnumeric
