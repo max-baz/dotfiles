@@ -1,5 +1,6 @@
-{
+{ stable, ... }: {
   programs.ssh = {
+    package = stable.openssh;
     ciphers = [
       "chacha20-poly1305@openssh.com"
       "aes256-gcm@openssh.com"
