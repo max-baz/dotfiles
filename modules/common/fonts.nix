@@ -8,6 +8,27 @@
       };
     };
 
+    xdg.configFile."fontconfig/conf.d/01-emoji.conf".text = ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+      <fontconfig>
+        <match target="pattern">
+          <test name="family"><string>Noto Color Emoji</string></test>
+          <edit name="family" mode="assign" binding="same"><string>JoyPixels</string></edit>
+        </match>
+
+        <match target="pattern">
+          <test name="family"><string>Apple Color Emoji</string></test>
+          <edit name="family" mode="assign" binding="same"><string>JoyPixels</string></edit>
+        </match>
+
+        <match target="pattern">
+          <test name="family"><string>Segoe UI Emoji</string></test>
+          <edit name="family" mode="assign" binding="same"><string>JoyPixels</string></edit>
+        </match>
+      </fontconfig>
+    '';
+
     home.packages = with pkgs; [
       font-awesome
       input-fonts
