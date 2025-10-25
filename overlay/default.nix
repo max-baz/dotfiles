@@ -35,6 +35,8 @@
         };
       });
 
+      signal-desktop-bin = super.callPackage ./signal-desktop-bin/package.nix { };
+
       pik = super.rustPlatform.buildRustPackage rec {
         pname = "pik";
         version = "0.9.0";
