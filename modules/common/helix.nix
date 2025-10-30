@@ -28,7 +28,6 @@
       rust-analyzer
       tailwindcss-language-server
       taplo
-      taplo-lsp
       terraform-ls
       typescript
       vscode-langservers-extracted

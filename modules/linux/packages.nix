@@ -48,10 +48,10 @@
     kubernetes-helm
     libnotify
     magic-wormhole-rs
+    mariadb.client
     maximbaz-scripts
     meld
     msmtp
-    mysql-client
     netcat-openbsd
     nftables
     nodejs

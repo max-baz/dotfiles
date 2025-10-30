@@ -1,7 +1,7 @@
 { callPackage, commandLineArgs }:
 callPackage ./generic.nix { inherit commandLineArgs; } {
   pname = "signal-desktop-bin";
-  version = "7.76.0";
+  version = "7.77.0";
 
   libdir = "usr/lib64/signal-desktop";
   bindir = "usr/bin";
@@ -10,6 +10,6 @@ callPackage ./generic.nix { inherit commandLineArgs; } {
     bsdtar -xf $downloadedFile -C "$out"
   '';
 
-  url = "https://download.copr.fedorainfracloud.org/results/useidel/signal-desktop/fedora-42-aarch64/09719522-signal-desktop/signal-desktop-7.76.0-1.fc42.aarch64.rpm";
-  hash = "sha256-lX6sRxtq4uSGiqfitunw2KRSpA42byVY7M8y4saRf9c=";
+  url = "https://download.copr.fedorainfracloud.org/results/useidel/signal-desktop/fedora-42-aarch64/09750522-signal-desktop/signal-desktop-7.77.0-1.fc42.aarch64.rpm";
+  hash = "sha256-MBiZT4k+f/feIGCzY0mxMeB5Xz47PPV0IxMJ1lzmHBA=";
 }
