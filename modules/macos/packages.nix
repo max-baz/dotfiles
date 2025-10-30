@@ -51,7 +51,6 @@
 
 
     bfs
-    delta
     dfrs
     doggo
     dos2unix

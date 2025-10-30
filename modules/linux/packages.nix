@@ -10,7 +10,6 @@
     chromium
     curlie
     dbmate
-    delta
     dfrs
     doggo
     dos2unix
