@@ -4,6 +4,36 @@
       programs = {
         aerc = {
           enable = true;
+          templates = {
+            forward_as_body = ''
+              X-Mailer: aerc {{version}}
+
+              {{- with .Signature }}
+              {{.}}
+              {{- end }}
+
+              ---------- Forwarded message ---------
+              From: {{.OriginalFrom | persons | join ", "}}
+              Date: {{dateFormat .OriginalDate "Mon Jan 2, 2006 at 3:04 PM"}}
+
+              {{.OriginalText}}
+            '';
+
+            quoted_reply = ''
+              X-Mailer: aerc {{version}}
+
+              {{- with .Signature }}
+              {{.}}
+              {{- end }}
+
+              On {{dateFormat (.OriginalDate | toLocal) "Mon Jan 2, 2006 at 3:04 PM MST"}}, {{.OriginalFrom | names | join ", "}} wrote:
+              {{ if eq .OriginalMIMEType "text/html" -}}
+              {{- exec `html` .OriginalText | trimSignature | quote -}}
+              {{- else -}}
+              {{- trimSignature .OriginalText | quote -}}
+              {{- end}}
+            '';
+          };
           extraConfig = {
             compose = {
               edit-headers = true;
