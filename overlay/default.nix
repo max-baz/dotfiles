@@ -105,10 +105,10 @@
 
       network-dmenu = super.stdenv.mkDerivation rec {
         pname = "network-dmenu";
-        version = "2.13.1";
+        version = "2.13.2";
         src = super.fetchurl {
           url = "https://github.com/cyrinux/${pname}/releases/download/${version}/${pname}-aarch64-linux";
-          hash = "sha256-BgyKht/IYuCr0ZrALd18U3GBlIhyR+acfHa27OsWMSQ=";
+          hash = "sha256-Og2Z8LiNqkNJy+AODHkDrHSdowaPSuOWeT6ZjF1S4xs=";
         };
         dontUnpack = true;
         nativeBuildInputs = [ super.autoPatchelfHook ];
