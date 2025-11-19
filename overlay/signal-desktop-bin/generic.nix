@@ -116,8 +116,7 @@ let
     hash = "sha256-UVGGbSURQVRSMNopZNASSbg00wEB/AHGC9K7vJNRrZw=";
   };
   copy-noto-emoji = fetchurl {
-    # url = "https://raw.githubusercontent.com/NixOS/nixpkgs/refs/heads/master/pkgs/by-name/si/signal-desktop-bin/copy-noto-emoji.py";
-    url = "https://raw.githubusercontent.com/NixOS/nixpkgs/f2f0898fa558b51f5deb1f3e82f71950e3c6024b/pkgs/by-name/si/signal-desktop-bin/copy-noto-emoji.py";
+    url = "https://raw.githubusercontent.com/NixOS/nixpkgs/refs/heads/master/pkgs/by-name/si/signal-desktop-bin/copy-noto-emoji.py";
     hash = "sha256-W8+fMDo0mS9T9kjN0/Y+fsiLBt6h0aHs5Ya2RjGeFzU=";
   };
 in
