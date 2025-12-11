@@ -2,12 +2,14 @@
   home-manager.users.${config.user}.home.packages = with pkgs; [
     abiword
     asahi-bless
+    azure-cli
     bfs
     brightnessctl
     stable.calibre
     cargo
     cargo-outdated
     chromium
+    cilium-cli
     curlie
     dbmate
     dfrs
@@ -39,6 +41,7 @@
     isync
     jq
     just
+    k9s
     kitty
     krita
     kubectl
@@ -89,6 +92,7 @@
     swayr
     syncthing
     systembus-notify
+    talosctl
     tailspin
     teehee
     tig
