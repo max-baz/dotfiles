@@ -86,6 +86,7 @@
               thread-prefix-unfolded = "";
               threading-enabled = true;
               spinner = "◜,◠,◝,◞,◡,◟";
+              reverse-thread-order = true;
             };
           };
 
