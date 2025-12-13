@@ -16,7 +16,6 @@
         clearurls
         containerise
         darkreader
-        ff2mpv
         istilldontcareaboutcookies
         multi-account-containers
         privacy-badger
@@ -24,6 +23,7 @@
         sponsorblock
         to-google-translate
         ublock-origin
+        # ff2mpv
         # temporary-containers-plus
         # open-external-links-in-a-container
       ];
