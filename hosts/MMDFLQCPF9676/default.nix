@@ -7,7 +7,7 @@ inputs.nix-darwin.lib.darwinSystem rec {
   };
   modules = [
     globals
-    inputs.maximbaz-private.nixosModules.macos
+    inputs.dotfiles-private.nixosModules.macos
     inputs.mac-app-util.darwinModules.default
     inputs.home-manager.darwinModules.home-manager
     ../../modules/macos

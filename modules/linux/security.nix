@@ -17,6 +17,9 @@
     };
 
     pam = {
+      ### SETUP
+      # mkdir -p ~/.config/Yubico
+      # pamu2fcfg >> ~/.config/Yubico/u2f_keys
       services.sudo.u2fAuth = true;
       services.polkit-1.u2fAuth = true;
       u2f.settings.cue = true;

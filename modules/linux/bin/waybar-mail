@@ -1,7 +1,7 @@
 #!/bin/sh
 
 check() {
-    [ ! -d "$HOME/.mail" ] && return
+    [ -d "$HOME/.mail" ] || return
 
     notmuch new > /dev/null
     count="$(notmuch count 'tag:unread')"
@@ -11,7 +11,7 @@ check() {
     else
         printf '{"text": "%s", "tooltip": "%s", "alt": "icon"}\n' "$count" "$tooltip"
     fi
-    inotifywait -q -e move -e create -e delete "$HOME/.mail/maximbaz/INBOX/cur" > /dev/null
+    inotifywait -q -e move -e create -e delete "$HOME/.mail"/*/INBOX/cur >/dev/null
     check
 }
 

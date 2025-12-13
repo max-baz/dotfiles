@@ -1,6 +1,18 @@
 {
   description = "maximbaz";
 
+  # # uncomment during installation
+  # nixConfig = {
+  #   extra-substituters = [
+  #     "https://cache.soopy.moe"
+  #     "https://nixos-apple-silicon.cachix.org"
+  #   ];
+  #   extra-trusted-public-keys = [
+  #     "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo="
+  #     "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
+  #   ];
+  # };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-25.05";
@@ -14,6 +26,10 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware = {
+      url = "github:nixos/nixos-hardware";
     };
 
     apple-silicon-support = {
@@ -35,7 +51,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    maximbaz-private.url = "git+file:///home/maximbaz/.dotfiles-private";
+    dotfiles-private.url = "git+file:///home/max/.dotfiles-private";
 
     waysip = {
       url = "github:waycrate/waysip";
@@ -54,9 +70,10 @@
   };
 
   outputs = inputs:
-    let globals = { user = "maximbaz"; }; in rec {
+    let globals = { user = "max"; }; in rec {
       nixosConfigurations = {
         home-manitoba = import ./hosts/home-manitoba { inherit inputs globals; };
+        home-titan = import ./hosts/home-titan { inherit inputs globals; };
       };
 
       darwinConfigurations = {
@@ -65,6 +82,7 @@
 
       homeConfigurations = {
         home-manitoba = nixosConfigurations.home-manitoba.config.home-manager.users.${globals.user}.home;
+        home-titan = nixosConfigurations.home-titan.config.home-manager.users.${globals.user}.home;
         MMDFLQCPF9676 = darwinConfigurations.MMDFLQCPF9676.config.home-manager.users.${globals.user}.home;
       };
     };

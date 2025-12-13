@@ -17,7 +17,7 @@ update: git-commit-flakes git-add
     nix flake update --option access-tokens "github.com=$(gh auth token)"
 
 update-private: git-add
-    nix flake update maximbaz-private
+    nix flake update dotfiles-private
 
 git-commit-flakes:
     #!/usr/bin/env sh

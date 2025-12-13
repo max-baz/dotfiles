@@ -14,7 +14,7 @@ let
   };
 in
 inputs.nixpkgs.lib.nixosSystem rec {
-  system = "aarch64-linux";
+  system = "x86_64-linux";
   specialArgs = {
     util = (import ../../util);
     firefox-addons = inputs.firefox-addons.packages.${system};
@@ -24,17 +24,18 @@ inputs.nixpkgs.lib.nixosSystem rec {
     globals
     stable
     unstable-small
+    ./firmware.nix
+    ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.apple-t2
     inputs.sops-nix.nixosModules.sops
-    inputs.apple-silicon-support.nixosModules.apple-silicon-support
     inputs.dotfiles-private.nixosModules.linux
     inputs.home-manager.nixosModules.home-manager
-    ./hardware-configuration.nix
     ../../modules/linux
-    ../../modules/hardware/asahi.nix
+    ../../modules/hardware/t2.nix
     {
       personal.enable = true;
 
-      networking.hostName = "home-manitoba";
+      networking.hostName = "home-titan";
 
       home-manager.users.${globals.user}.imports = [
         inputs.sops-nix.homeManagerModules.sops
