@@ -18,7 +18,9 @@ case "$1" in
         ;;
     suspend)
         before_lock
+        sudo rmmod -f apple-bce
         systemctl -i suspend
+        sudo modprobe apple-bce
         swaylock
         # TODO systemctl --user restart wlsunset
         ;;

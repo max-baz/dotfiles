@@ -27,7 +27,7 @@
       checkConfig = false;
 
       extraConfig = ''
-        set $screen_laptop 'Unknown Unknown Unknown'
+        set $screen_laptop 'Apple Computer Inc Color LCD Unknown'
         bindswitch --locked lid:off output $screen_laptop dpms on
         bindswitch --locked lid:on  output $screen_laptop dpms off, exec brightnessctl set -d kbd_backlight 0
 
@@ -220,8 +220,8 @@
           "${hyper}+grave" = "exec cgtoggle wl-clipboard-manager dmenu";
           "${hyper}+Backspace" = "exec cgtoggle emoji-dmenu";
           "${hyper}+XF86MonBrightnessUp" = "exec cgtoggle emoji-dmenu";
-          "XF86Search" = "exec cglaunch screenshot-area";
-          "${hyper}+XF86Search" = "exec cglaunch record-area";
+          "${hyper}+Escape" = "exec cglaunch screenshot-area";
+          "${win}+Escape" = "exec cglaunch record-area";
           "${win}+i" = "exec cglaunch ${lib.getExe pkgs.hyprpicker} -al";
 
           # Kill focused window
@@ -274,12 +274,10 @@
           "${hyper}+q" = "exec swaync-client --close-all";
 
           # Brightness control
-          "XF86MonBrightnessUp" = "exec brightnessctl set -- +1%";
-          "XF86MonBrightnessDown" = "exec brightnessctl set -- -1%";
-          "Shift+XF86MonBrightnessUp" = "exec brightnessctl set -- +5%";
-          "Shift+XF86MonBrightnessDown" = "exec brightnessctl set -- -5%";
-          "${win}+XF86MonBrightnessUp" = "exec brightnessctl set -d kbd_backlight -- +5%";
-          "${win}+XF86MonBrightnessDown" = "exec brightnessctl set -d kbd_backlight -- -5%";
+          "${hyper}+F2" = "exec brightnessctl set -- +1%";
+          "${hyper}+F1" = "exec brightnessctl set -- -1%";
+          "${win}+F2" = "exec brightnessctl set -d kbd_backlight -- +5%";
+          "${win}+F1" = "exec brightnessctl set -d kbd_backlight -- -5%";
 
           # Media control
           "--locked XF86AudioPlay" = "exec playerctl --player playerctld play-pause";

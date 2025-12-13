@@ -3,9 +3,6 @@
     enable = true;
     keyboards = {
       default = {
-        devices = [
-          "/dev/input/by-path/platform-39b10c000.spi-cs-0-event-kbd"
-        ];
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (defsrc)
