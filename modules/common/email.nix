@@ -85,6 +85,7 @@
               thread-prefix-tip = "";
               thread-prefix-unfolded = "";
               threading-enabled = true;
+              sort = "-r arrival";
               spinner = "◜,◠,◝,◞,◡,◟";
               reverse-thread-order = true;
             };
