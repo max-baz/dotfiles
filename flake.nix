@@ -72,18 +72,13 @@
   outputs = inputs:
     let globals = { user = "max"; }; in rec {
       nixosConfigurations = {
-        home-manitoba = import ./hosts/home-manitoba { inherit inputs globals; };
         home-titan = import ./hosts/home-titan { inherit inputs globals; };
       };
 
-      darwinConfigurations = {
-        MMDFLQCPF9676 = import ./hosts/MMDFLQCPF9676 { inherit inputs globals; };
-      };
+      darwinConfigurations = { };
 
       homeConfigurations = {
-        home-manitoba = nixosConfigurations.home-manitoba.config.home-manager.users.${globals.user}.home;
         home-titan = nixosConfigurations.home-titan.config.home-manager.users.${globals.user}.home;
-        MMDFLQCPF9676 = darwinConfigurations.MMDFLQCPF9676.config.home-manager.users.${globals.user}.home;
       };
     };
 }
