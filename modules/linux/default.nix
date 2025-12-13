@@ -27,7 +27,6 @@
     ./polkit.nix
     ./power.nix
     ./security.nix
-    ./segger.nix
     ./ssh.nix
     ./sudo.nix
     ./swap.nix
