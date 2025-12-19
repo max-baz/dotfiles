@@ -36,11 +36,11 @@
     },
     "dotfiles-private": {
       "locked": {
-        "lastModified": 1765739748,
-        "narHash": "sha256-AK8ck0lOugvsHig28RuAFq+kY0aWGa5sD7LQcoUETdw=",
+        "lastModified": 1766142758,
+        "narHash": "sha256-VJ20mlk8dZYeZzSeXxLLvXQFzcwZ1fX7rPpNhcK2QXU=",
         "ref": "refs/heads/main",
-        "rev": "d4cd30fa141c1c271dfcc85419b67498dd5cb411",
-        "revCount": 48,
+        "rev": "d9042a2eb6f8856b1838609c4cd36f942f281a36",
+        "revCount": 49,
         "type": "git",
         "url": "file:///home/max/.dotfiles-private"
       },

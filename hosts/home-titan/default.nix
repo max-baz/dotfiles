@@ -1,29 +1,23 @@
 { inputs, globals, ... }:
 let
-  stable = { config, pkgs, ... }: {
+  extraArgs = { pkgs, ... }: {
     _module.args.stable = import inputs.stable {
-      inherit (pkgs.stdenv.hostPlatform) system;
-      inherit (config.nixpkgs) config;
+      inherit (pkgs) config overlays;
+      localSystem = pkgs.stdenv.hostPlatform;
     };
-  };
-  unstable-small = { config, pkgs, ... }: {
     _module.args.unstable-small = import inputs.unstable-small {
-      inherit (pkgs.stdenv.hostPlatform) system;
-      inherit (config.nixpkgs) config;
+      inherit (pkgs) config overlays;
+      localSystem = pkgs.stdenv.hostPlatform;
     };
+    _module.args.util = (import ../../util);
+    _module.args.firefox-addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
+    _module.args.waysip = inputs.waysip.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 in
-inputs.nixpkgs.lib.nixosSystem rec {
-  system = "x86_64-linux";
-  specialArgs = {
-    util = (import ../../util);
-    firefox-addons = inputs.firefox-addons.packages.${system};
-    waysip = inputs.waysip.packages.${system}.default;
-  };
+inputs.nixpkgs.lib.nixosSystem {
   modules = [
     globals
-    stable
-    unstable-small
+    extraArgs
     ./firmware.nix
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.apple-t2
