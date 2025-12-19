@@ -102,7 +102,7 @@
     unrar
     unzip
     usbguard
-    vault
+    vault-bin
     vimiv-qt
     vivid
     w3m
