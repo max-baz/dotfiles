@@ -4,6 +4,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "input" ];
     shell = pkgs.zsh;
+    uid = 1000;
   };
 
   systemd.services."getty@tty1" = {
