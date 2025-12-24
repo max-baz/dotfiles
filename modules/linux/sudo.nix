@@ -14,8 +14,6 @@
         { command = "/run/current-system/sw/bin/resolvectl dns wlan0 *"; options = [ "SETENV" "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/resolvectl revert wlan0"; options = [ "SETENV" "NOPASSWD" ]; }
         { command = "/run/current-system/sw/bin/systemctl stop pcscd.service"; options = [ "SETENV" "NOPASSWD" ]; }
-        { command = "/run/current-system/sw/bin/rmmod -f apple-bce"; options = [ "SETENV" "NOPASSWD" ]; }
-        { command = "/run/current-system/sw/bin/modprobe apple-bce"; options = [ "SETENV" "NOPASSWD" ]; }
       ];
     }];
   };

@@ -1,4 +1,4 @@
-{
+{ lib, pkgs, ... }: {
   nix.settings = {
     extra-substituters = [ "https://cache.soopy.moe" ];
     extra-trusted-public-keys = [ "cache.soopy.moe-1:0RZVsQeR+GOh0VQI9rvnHz55nVXkFardDqfm4+afjPo=" ];
@@ -24,4 +24,31 @@
       options apple-gmux force_igd=y
     '';
   };
+
+  systemd.services = lib.genAttrs [
+    "systemd-suspend"
+    "systemd-hybrid-sleep"
+    "systemd-hibernate"
+    "systemd-suspend-then-hibernate"
+  ]
+    (name: {
+      serviceConfig = {
+        Environment = "SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false";
+
+        ExecStartPre = [
+          "-${lib.getExe' pkgs.kmod "rmmod"} -f hid-appletb-kbd"
+          "-${lib.getExe' pkgs.kmod "rmmod"} -f hid-appletb-bl"
+          "-${lib.getExe' pkgs.kmod "rmmod"} -f apple-bce"
+        ];
+
+        ExecStartPost = [
+          "${lib.getExe' pkgs.coreutils "sleep"} 4"
+          "${lib.getExe' pkgs.kmod "modprobe"} apple-bce"
+          "${lib.getExe' pkgs.coreutils "sleep"} 4"
+          "${lib.getExe' pkgs.kmod "modprobe"} hid-appletb-bl"
+          "${lib.getExe' pkgs.coreutils "sleep"} 2"
+          "${lib.getExe' pkgs.kmod "modprobe"} hid-appletb-kbd"
+        ];
+      };
+    });
 }

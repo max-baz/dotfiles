@@ -38,7 +38,7 @@
         dhcpConfig.RouteMetric = 20;
       };
       "50-wired" = {
-        matchConfig.Name = "enp*"; # TODO test this
+        matchConfig.Name = "enp*";
         networkConfig.DHCP = "yes";
         dhcpConfig.RouteMetric = 50;
       };
