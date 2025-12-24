@@ -25,6 +25,15 @@
     '';
   };
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+    ];
+  };
+
+  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+
   systemd.services = lib.genAttrs [
     "systemd-suspend"
     "systemd-hybrid-sleep"
