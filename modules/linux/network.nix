@@ -35,12 +35,12 @@
       "20-wireless" = {
         matchConfig.Name = "wlan0";
         networkConfig.DHCP = "yes";
-        dhcpConfig.RouteMetric = 20;
+        dhcpV4Config.RouteMetric = 20;
       };
       "50-wired" = {
         matchConfig.Name = "enp*";
         networkConfig.DHCP = "yes";
-        dhcpConfig.RouteMetric = 50;
+        dhcpV4Config.RouteMetric = 10;
       };
     };
   };
