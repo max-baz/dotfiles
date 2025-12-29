@@ -4,8 +4,9 @@ need_notify_low=1
 notification_id=0
 
 upower -m | while read -r _; do
-    battery_info="$(upower -i /org/freedesktop/UPower/devices/battery_macsmc_battery)"
+    battery_info="$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)"
     percent=$(echo "$battery_info" | awk '/percentage/ {print substr($2, 1, length($2)-1)}')
+    percent=${percent%.*}
     state=$(echo "$battery_info" | awk '/state/ {print $2}')
 
     if [ "$state" = "discharging" ]; then
