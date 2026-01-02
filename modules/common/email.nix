@@ -306,6 +306,24 @@
         w3m
         dante
       ];
+
+      systemd.user = {
+        services.mbsync = {
+          Service = {
+            Type = "oneshot";
+            ExecStart = lib.getExe' pkgs.maximbaz-scripts "checkmail";
+          };
+        };
+
+        timers.mbsync = {
+          Timer = {
+            OnCalendar = "*:0/5";
+            Unit = "mbsync.service";
+          };
+
+          Install.WantedBy = [ "timers.target" ];
+        };
+      };
     };
   };
 }
