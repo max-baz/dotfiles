@@ -11,6 +11,11 @@
       ExecStart = lib.getExe pkgs.push2talk;
     };
 
+    sunsetr = util.systemdService {
+      Description = "Blue light filter";
+      ExecStart = "${lib.getExe pkgs.sunsetr}";
+    };
+
     sway-inactive-windows-transparency = util.systemdService {
       Description = "Make inactive windows in sway semi-transparent";
       Environment = [ "INACTIVE_OPACITY=0.7" ];
