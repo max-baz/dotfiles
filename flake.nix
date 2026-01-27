@@ -1,5 +1,5 @@
 {
-  description = "maximbaz";
+  description = "maxbaz";
 
   # # uncomment during installation
   # nixConfig = {

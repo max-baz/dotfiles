@@ -70,7 +70,7 @@
             };
           in
           super.fetchurl {
-            url = "https://github.com/maximbaz/${pname}/releases/download/${version}/${pname}-${system}-musl";
+            url = "https://github.com/max-baz/${pname}/releases/download/${version}/${pname}-${system}-musl";
             hash = hashes.${system} or (throw "waybar-syncthing: unsupported system ${system}");
           };
 
