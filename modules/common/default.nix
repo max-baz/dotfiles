@@ -15,6 +15,7 @@
     ./gpg.nix
     ./gtk.nix
     ./helix.nix
+    ./k8s.nix
     ./kitty.nix
     ./mpv.nix
     ./nix-index.nix

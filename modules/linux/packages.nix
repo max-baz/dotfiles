@@ -1,11 +1,11 @@
-{ config, pkgs, stable, waysip, ... }: {
+{ config, pkgs, waysip, hongdown, unstable-small, ... }: {
   home-manager.users.${config.user}.home.packages = with pkgs; [
     abiword
     asahi-bless
     azure-cli
     bfs
     brightnessctl
-    stable.calibre
+    calibre
     cargo
     cargo-outdated
     chromium
@@ -35,19 +35,15 @@
     goimapnotify
     grim
     helvum
+    hongdown
     hyprpicker
     inotify-tools
     iptables-nftables-compat
     isync
     jq
     just
-    k9s
     kitty
     krita
-    kubectl
-    kubectx
-    kubelogin
-    kubernetes-helm
     libnotify
     magic-wormhole-rs
     mariadb.client
@@ -85,7 +81,6 @@
     sops
     spicedb-zed
     sqlite
-    stern
     swappy
     swaybg
     swaylock
@@ -96,6 +91,7 @@
     tailspin
     teehee
     tig
+    unstable-small.ttl
     trash-cli
     tree
     udiskie
@@ -114,6 +110,7 @@
     wl-clipboard
     wldash
     yarn
+    yazi
     zathura
     zip
     zsh

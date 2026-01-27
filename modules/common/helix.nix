@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, hongdown, ... }: {
   home-manager.users.${config.user}.programs.helix = with pkgs; {
     enable = true;
     defaultEditor = true;
@@ -13,6 +13,7 @@
       gopls
       gotools
       helix-gpt
+      hongdown
       marksman
       nil
       nixd
@@ -277,8 +278,8 @@
           name = "markdown";
           language-servers = [ "marksman" ];
           formatter = {
-            command = "prettier";
-            args = [ "--stdin-filepath" "%{buffer_name}" ];
+            command = "hongdown";
+            args = [ "--line-width=120" "--stdin" ];
           };
           auto-format = true;
         }

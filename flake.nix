@@ -15,7 +15,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    stable.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     sops-nix = {
@@ -65,6 +65,11 @@
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hongdown = {
+      url = "github:dahlia/hongdown";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
