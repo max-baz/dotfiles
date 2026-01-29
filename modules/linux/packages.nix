@@ -87,15 +87,14 @@
     swayr
     syncthing
     systembus-notify
-    talosctl
     tailspin
     teehee
     tig
-    unstable-small.ttl
     trash-cli
     tree
     udiskie
     unrar
+    unstable-small.ttl
     unzip
     usbguard
     vault-bin
@@ -111,6 +110,8 @@
     wldash
     yarn
     yazi
+    yq-go
+    yubikey-manager
     zathura
     zip
     zsh
