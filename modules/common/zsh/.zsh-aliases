@@ -56,7 +56,7 @@ p() { ping "${1:-1.1.1.1}" }
 
 tmpd() { cd "$(mktemp -d -t "${1:-tmp}.XXXXXXXXXX")" }
 
-eg() { e $(rg -l "$@") }
+eg() { e $(rg -n --no-heading --color=never "^.*$*.*$" -r '') }
 
 ## kubectl
 
