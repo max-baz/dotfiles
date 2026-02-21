@@ -1,7 +1,8 @@
-{ config, pkgs, waysip, hongdown, unstable-small, ... }: {
+{ config, pkgs, waysip, unstable-small, ... }: {
   home-manager.users.${config.user}.home.packages = with pkgs; [
     abiword
     asahi-bless
+    awscli
     azure-cli
     bfs
     brightnessctl
@@ -9,7 +10,6 @@
     cargo
     cargo-outdated
     chromium
-    cilium-cli
     curlie
     dbmate
     dfrs
@@ -35,7 +35,6 @@
     goimapnotify
     grim
     helvum
-    hongdown
     hyprpicker
     inotify-tools
     iptables-nftables-compat

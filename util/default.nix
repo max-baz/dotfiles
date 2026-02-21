@@ -1,5 +1,5 @@
 {
-  systemdService = { Description, ExecStart, Environment ? "" }: {
+  systemdService = { Description, ExecStart, Environment ? [ ] }: {
     Unit = {
       Description = Description;
       PartOf = [ "graphical-session.target" ];

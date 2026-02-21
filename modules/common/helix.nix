@@ -1,4 +1,4 @@
-{ config, pkgs, hongdown, ... }: {
+{ config, pkgs, ... }: {
   home-manager.users.${config.user}.programs.helix = with pkgs; {
     enable = true;
     defaultEditor = true;
@@ -12,7 +12,6 @@
       golangci-lint-langserver
       gopls
       gotools
-      helix-gpt
       hongdown
       marksman
       nil
@@ -186,11 +185,6 @@
         args = [ "lsp-proxy" ];
       };
 
-      language-server.gpt = {
-        command = "helix-gpt";
-        args = [ "--handler" "copilot" ];
-      };
-
       language-server.rust-analyzer.config.check = {
         command = "clippy";
       };
@@ -206,12 +200,12 @@
       language = [
         {
           name = "css";
-          language-servers = [ "vscode-css-language-server" "tailwindcss-ls" "biome" "gpt" ];
+          language-servers = [ "vscode-css-language-server" "tailwindcss-ls" "biome" ];
           auto-format = true;
         }
         {
           name = "go";
-          language-servers = [ "gopls" "golangci-lint-lsp" "gpt" ];
+          language-servers = [ "gopls" "golangci-lint-lsp" ];
           formatter = {
             command = "goimports";
           };
@@ -231,7 +225,7 @@
           language-servers = [
             { name = "typescript-language-server"; except-features = [ "format" ]; }
             "biome"
-            "gpt"
+
           ];
           auto-format = true;
         }
@@ -266,7 +260,7 @@
             { name = "typescript-language-server"; except-features = [ "format" ]; }
             "tailwindcss-ls"
             "biome"
-            "gpt"
+
           ];
           formatter = {
             command = "biome";
@@ -292,7 +286,7 @@
         }
         {
           name = "python";
-          language-servers = [ "pylsp" "gpt" ];
+          language-servers = [ "pylsp" ];
           formatter = {
             command = "sh";
             args = [ "-c" "ruff check --select I --fix - | ruff format --line-length 88 -" ];
@@ -301,7 +295,7 @@
         }
         {
           name = "rust";
-          language-servers = [ "rust-analyzer" "gpt" ];
+          language-servers = [ "rust-analyzer" ];
           auto-format = true;
         }
         {
@@ -327,7 +321,7 @@
             { name = "typescript-language-server"; except-features = [ "format" ]; }
             "tailwindcss-ls"
             "biome"
-            "gpt"
+
           ];
           formatter = {
             command = "biome";
@@ -340,7 +334,7 @@
           language-servers = [
             { name = "typescript-language-server"; except-features = [ "format" ]; }
             "biome"
-            "gpt"
+
           ];
           formatter = {
             command = "biome";

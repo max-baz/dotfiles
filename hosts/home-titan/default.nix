@@ -12,7 +12,6 @@ let
     _module.args.util = (import ../../util);
     _module.args.firefox-addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
     _module.args.waysip = inputs.waysip.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    _module.args.hongdown = inputs.hongdown.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 in
 inputs.nixpkgs.lib.nixosSystem {
