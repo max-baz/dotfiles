@@ -53,7 +53,6 @@
     nftables
     nodejs
     notmuch
-    nzbget
     p7zip
     pam_u2f
     pass
