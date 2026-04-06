@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   src = pkgs.fetchzip {
-    url = "https://max.baz.nu/home-titan-firmware.tar.gz";
+    url = "https://max.baz.nu/share/home-titan-firmware.tar.gz";
     hash = "sha256-1974c+poAvC1QqKLRN5rIzINtM7rvXG7ug9qH92wyyk=";
   };
 in

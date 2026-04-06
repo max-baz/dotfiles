@@ -34,7 +34,6 @@
     go
     goimapnotify
     grim
-    helvum
     hyprpicker
     inotify-tools
     iptables-nftables-compat
