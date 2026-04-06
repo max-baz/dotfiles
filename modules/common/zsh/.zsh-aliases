@@ -41,6 +41,7 @@ alias gpg-change-card='gpg-connect-agent "scd serialno" "learn --force" /bye'
 alias yd='yt-dlp'
 alias ws='wormhole-rs tx'
 alias wr='wormhole-rs rx'
+alias camera='gphoto2 --stdout --capture-movie | ffmpeg -f mjpeg -i - -c:v copy -fps_mode passthrough -f v4l2 /dev/video10'
 
 compdef trash-put=rm
 compdef w3mman=man

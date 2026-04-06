@@ -9,6 +9,7 @@
     ./boot.nix
     ./btrfs.nix
     ./calendar.nix
+    ./camera.nix
     ./crypttab.nix
     ./cursor.nix
     ./dbus.nix
