@@ -1,6 +1,7 @@
 { config, pkgs, unstable-small, ... }: {
   home-manager.users.${config.user} = { config, ... }: {
     home.packages = with pkgs; [
+      argocd
       cilium-cli
       k9s
       kubectl
