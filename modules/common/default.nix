@@ -5,6 +5,7 @@
     ./bat.nix
     ./bottom.nix
     ./browserpass.nix
+    ./chromium.nix
     ./direnv.nix
     ./docker.nix
     ./email.nix
@@ -20,6 +21,7 @@
     ./mpv.nix
     ./nix-index.nix
     ./nix.nix
+    ./parcel.nix
     ./pgcli.nix
     ./ripgrep.nix
     ./swappy.nix

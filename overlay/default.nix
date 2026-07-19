@@ -204,6 +204,63 @@
         };
       };
 
+      parcel-host = super.stdenv.mkDerivation rec {
+        pname = "parcel-host";
+        version = "1.0.2";
+
+        src = super.fetchFromGitHub {
+          owner = "parcel-pm";
+          repo = "parcel";
+          rev = "v${version}";
+          hash = "sha256-UlF0avdoX7/Msx66nNuLPOCRSNE5PXRF4ELBYYtcFIU=";
+        };
+
+        dontBuild = true;
+
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+
+        installPhase = ''
+          runHook preInstall
+
+          install -Dm755 parcel-host $out/bin/parcel-host
+          install -Dm755 src/parcel-host $out/share/parcel-host/main-host.sh
+
+          wrapProgram $out/bin/parcel-host \
+            --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.bash pkgs.gnupg pkgs.jq pkgs.coreutils ]}
+
+          mkdir -p $out/lib/mozilla/native-messaging-hosts
+          cat > $out/lib/mozilla/native-messaging-hosts/com.github.erayd.parcel.json <<EOF
+          {
+            "name": "com.github.erayd.parcel",
+            "description": "Native host component for the Parcel extension",
+            "path": "$out/bin/parcel-host",
+            "type": "stdio",
+            "allowed_extensions": [ "parcel@erayd.net" ]
+          }
+          EOF
+
+          mkdir -p $out/etc/chromium/native-messaging-hosts
+          cat > $out/etc/chromium/native-messaging-hosts/com.github.erayd.parcel.json <<EOF
+          {
+            "name": "com.github.erayd.parcel",
+            "description": "Native host component for the Parcel extension",
+            "path": "$out/bin/parcel-host",
+            "type": "stdio",
+            "allowed_origins": [ "chrome-extension://iondhmpkblldcbiloajfkonllgkljbgj/", "chrome-extension://ciifpadakeohfnnneflckhojbldkkllp/" ]
+          }
+          EOF
+
+          runHook postInstall
+        '';
+
+        meta = {
+          description = "Native messaging host for the Parcel browser extension";
+          homepage = "https://github.com/parcel-pm/parcel";
+          platforms = [ "aarch64-linux" "x86_64-linux" ];
+          mainProgram = "parcel-host";
+        };
+      };
+
       maximbaz-scripts = pkgs.stdenv.mkDerivation {
         pname = "maximbaz-scripts";
         version = "1.0.0";

@@ -9,7 +9,6 @@
     calibre
     cargo
     cargo-outdated
-    chromium
     curlie
     dbmate
     dfrs
