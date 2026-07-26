@@ -81,7 +81,6 @@
     sops
     spicedb-zed
     sqlite
-    swappy
     swaybg
     swaylock
     swayr
@@ -101,7 +100,6 @@
     vault-bin
     vimiv-qt
     vivid
-    w3m
     waysip
     wev
     wf-recorder

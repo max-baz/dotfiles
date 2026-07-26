@@ -4,6 +4,10 @@
     wrapperFeatures.gtk = true;
   };
 
+  home-manager.users.${config.user}.home.packages = with pkgs; [
+    brightnessctl
+    wldash
+  ];
   home-manager.users.${config.user}.wayland.windowManager.sway =
     let
       workspace1 = "workspace number 1";

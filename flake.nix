@@ -17,6 +17,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixgl.url = "github:nix-community/nixGL";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -83,6 +84,7 @@
       homeConfigurations = {
         home-titan = nixosConfigurations.home-titan.config.home-manager.users.${globals.user}.home;
         home-pika = nixosConfigurations.home-pika.config.home-manager.users.${globals.user}.home;
+        work-xps14 = import ./hosts/work-xps14 { inherit inputs; };
       };
     };
 }

@@ -1,0 +1,289 @@
+#!/usr/bin/env zsh
+
+## generic
+
+command -v atuin     &> /dev/null    && eval "$(atuin init zsh --disable-up-arrow)"
+command -v curlie    &> /dev/null    && alias curl='curlie'
+command -v dfrs      &> /dev/null    && alias df='dfrs'
+command -v git       &> /dev/null    && alias diff='git diff --no-index'
+command -v trash-put &> /dev/null    && alias rm='trash-put'
+command -v bat       &> /dev/null    && alias c='bat'                                              || alias c='cat'
+command -v fd        &> /dev/null    && alias fd='fd --hidden --follow'                            || alias fd='find . -name'
+command -v rg        &> /dev/null    && alias rg='rg --hidden --follow --smart-case 2>/dev/null'   || alias rg='grep --color=auto --exclude-dir=.git -R'
+command -v eza       &> /dev/null    && alias ls='eza --group --git --group-directories-first'     || alias ls='ls --color=auto --group-directories-first -h'
+command -v eza       &> /dev/null    && alias la='ll -a'                                           || alias la='ll -A'
+command -v eza       &> /dev/null    && alias lk='ll -s=size'                                      || alias lk='ll -r --sort=size'
+command -v eza       &> /dev/null    && alias lm='ll -s=modified'                                  || alias lm='ll -r --sort=time'
+command -v doggo     &> /dev/null    && alias d='doggo'                                            || alias d='dig +nocmd +multiline +noall +answer'
+command -v w3mman    &> /dev/null    && alias man='w3mman'
+command -v pgcli     &> /dev/null    && alias pgcli='env LESS= pgcli'
+command -v nono      &> /dev/null    && alias pi='env JITI_FS_CACHE=0 nono run --profile pi --allow-cwd -- pi'
+command -v kubecolor &> /dev/null    && alias kubectl='kubecolor' && compdef kubecolor=kubectl
+
+command -v nixGLIntel &> /dev/null    && alias mpv='nixGLIntel mpv'
+
+alias e="$EDITOR"
+alias cp='cp -r --reflink=auto'
+alias du='dua'
+alias dui='dua interactive'
+alias mkdir='mkdir -p'
+alias hex='teehee'
+alias hexdump='od -A x -t x1z -v'
+alias http-serve='python -m http.server'
+alias htpasswd='openssl passwd -apr1'
+alias ip='ip -color -brief'
+alias macos='sudo asahi-bless --next --set-boot-macos --yes'
+alias o='cglaunch xdg-open'
+alias rm!='\rm -rf'
+alias rsync='rsync --verbose --archive --info=progress2 --human-readable --partial'
+alias sudo='sudo -E '
+alias tree='tree -a -I .git --dirsfirst'
+alias ll='ls -l'
+alias utc='env TZ=UTC date'
+alias gpg-change-card='gpg-connect-agent "scd serialno" "learn --force" /bye'
+alias yd='yt-dlp'
+alias ws='wormhole-rs tx'
+alias wr='wormhole-rs rx'
+alias camera='gphoto2 --stdout --capture-movie | ffmpeg -f mjpeg -i - -c:v copy -fps_mode passthrough -f v4l2 /dev/video10'
+
+compdef trash-put=rm
+compdef w3mman=man
+
+function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories md
+
+e64() { { [[ $# == 1 ]] && printf '%s' "$1" || cat } | base64 -w0 }
+d64() { { [[ $# == 1 ]] && printf '%s' "$1" || cat } | base64 --decode }
+qr()  { { [[ $# == 1 ]] && printf '%s' "$1" || cat } | qrencode -t utf8 }
+
+p() { ping "${1:-1.1.1.1}" }
+
+tmpd() { cd "$(mktemp -d -t "${1:-tmp}.XXXXXXXXXX")" }
+
+eg() { e $(rg -n --no-heading --color=never "^.*$*.*$" -r '') }
+
+## kubectl
+
+alias k='kubectl'
+alias kc='kubectx "$(kubectx | fzf --height=10%)"'
+alias kn='kubens "$(kubens | fzf --height=10%)"'
+alias kd='k describe'
+alias kd!='kd --all-namespaces'
+alias kdp='kd pod'
+alias kdel='k delete'
+alias ke='k exec -ti'
+alias kg='k get'
+alias kg!='kg --all-namespaces'
+alias kgd='kg deployment'
+alias kgd!='kgd --all-namespaces'
+alias kgp='kg pod -o wide -L role'
+alias kgp!='kgp --all-namespaces'
+alias kgs='kg service'
+alias kgs!='kgs --all-namespaces'
+kl() { stern --tail 1000 "$@" | tspin }
+
+kout() {
+    while IFS= read -rd: config; do
+        [ -f "$config" ] || continue
+        sed -i -E '/^\s*(access-token|expires-in|expires-on|refresh-token)/d' "$config"
+    done <<< "${KUBECONFIG:-$HOME/.kube/config}:"
+}
+
+kdrain () {
+  kubectl drain --force --delete-emptydir-data --ignore-daemonsets $(kubectl get nodes -o name | fzf +m -1 -q "$1")
+}
+
+## docker-compose
+
+command -v docker-compose &> /dev/null && alias dc='docker-compose' || alias dc='docker compose'
+alias dcu='dc up -d'
+alias dcd='dc down'
+alias dcr='dcd; dcu'
+alias dcp='dc pull'
+alias dcl='dc logs -t -f --tail=1000'
+alias dce='dc exec'
+alias dcs='dc ps'
+
+## systemctl
+
+alias sys='systemctl'
+alias sysu='systemctl --user'
+alias status='sys status'
+alias statusu='sysu status'
+alias start='sys start'
+alias startu='sysu start'
+alias stop='sys stop'
+alias stopu='sysu stop'
+alias restart='sys restart'
+alias restartu='sysu restart'
+alias enable='sys enable'
+alias enableu='sysu enable'
+alias disable='sys disable'
+alias disableu='sysu disable'
+alias reload='sys daemon-reload'
+alias reloadu='sysu daemon-reload'
+alias timers='sys list-timers'
+alias timersu='sysu list-timers'
+
+## git
+
+alias g='git'
+alias ga='g add'
+alias gaa='ga --all'
+alias gap='ga -p'
+alias gb='g branch'
+alias gba='g branch --all'
+alias gbd='g branch -D'
+alias gbda='g branch --no-color --merged | command grep -vE "^(\*|\s*(main|master|develop|dev)\s*$)" | command xargs -n 1 g branch -d'
+alias gbo='g branch --set-upstream-to=origin/$(g symbolic-ref --short HEAD) $(g symbolic-ref --short HEAD)'
+alias gbu='g branch --set-upstream-to=upstream/$(g symbolic-ref --short HEAD) $(g symbolic-ref --short HEAD)'
+alias gbsb='g bisect bad'
+alias gbsg='g bisect good'
+alias gbsr='g bisect reset'
+alias gbss='g bisect start'
+alias gc='g commit -v'
+alias gc!='gc --amend'
+alias gac='gaa && gc'
+alias gac!='gaa && gc!'
+alias gacm='gaa && gcm'
+alias gcm='gc -m'
+alias gcf='gc --fixup'
+alias gcfh='gc --fixup HEAD'
+alias gacf='gaa && gc --fixup'
+alias gacfh='gaa && gc --fixup HEAD'
+alias gco='g checkout'
+alias gcom='gco main || gco master'
+alias gcob='gco -b'
+alias gcop='gco -p'
+alias gcp='g cherry-pick'
+alias gcpa='gcp --abort'
+alias gcpc='gcp --continue'
+alias gd='g diff'
+alias gds='gd --cached'
+alias gf='g fetch --tags'
+alias gu='gf origin main:main'
+alias gl='g pull --tags -f --rebase --autostash'
+alias glog="g log --graph --pretty='%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit"
+alias gloga="glog --all"
+alias glogp='g log -p'
+alias gm='g merge'
+alias gma='gm --abort'
+alias gp='g push -u'
+alias gp!='g push'
+alias gpf='gp --force-with-lease'
+alias gpf!='gp --force'
+alias gra='g remote add'
+alias grr='g remote remove'
+alias grv='g remote -v'
+alias grba='g rebase --abort'
+alias grbc='g rebase --continue'
+alias grbi='g rebase -i'
+alias grbm='g rebase -i main'
+alias grbom='g rebase -i origin/main'
+alias gr='g reset'
+alias gr!='gr --hard'
+alias grh='gr HEAD'
+alias grh!='gr! HEAD'
+alias garh!='gaa && gr! HEAD'
+alias gs='g show --show-signature'
+alias gst='g stash'
+alias gstp='gst pop'
+alias gstc='gst clear'
+alias gss!='g status'
+alias gss='gss! -sb'
+alias gsa='g submodule add'
+alias gsu='g submodule update --remote'
+alias gsr='g submodule-remove'
+
+gcl() {
+    git clone --recursive "$@"
+    cd -- "${${${@: -1}##*/}%*.git}"
+}
+
+grf() {
+    upstream="$(git remote get-url upstream 2>/dev/null || git remote get-url origin)"
+    if [[ $# == 1 ]]; then
+        if [[ "$upstream" == https* ]]; then
+            fork=$(echo "$upstream" | awk -v name="$1" -F/ '{ print $1 "/" $2 "/" $3 "/" name "/" $5 }')
+        else
+            fork=$(echo "$upstream" | awk -v name="$1" -F/ '{ print "https://github.com/" name "/" $2 }')
+        fi
+
+        git remote remove "$1" 2>/dev/null
+        git remote add "$1" "$fork"
+        git fetch "$1"
+    else
+        myfork=$(echo "$upstream" | awk -v name="$USER" -F/ '{ print "git@github.com:" name "/" $5 }')
+
+        git remote remove upstream 2>/dev/null
+        git remote remove origin 2>/dev/null
+
+        git remote add upstream "$upstream"
+        git remote add origin "$myfork"
+
+        git fetch upstream
+        git fetch origin
+
+        git branch --set-upstream-to=upstream/main main
+    fi
+}
+
+### package management
+
+alias pacs='nix search nixpkgs'
+alias pacf='nix-locate'
+paci() { nix shell "nixpkgs#$1" }
+
+### database management
+
+db() {
+    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/db_access_cache"
+    touch "$cache"
+
+    local entries=$(find "${PASSWORD_STORE_DIR:-$HOME/.password-store}" -type f -path '*/db/*.gpg' -printf '%P\n' | sed 's/\.gpg$//')
+    local selection=$( (tac "$cache" | grep -Fx -f <(echo "$entries"); echo "$entries") | awk '!seen[$0]++' | fzf)
+
+    [[ -n "$selection" ]] || return 1
+
+    sed -i "\|^$selection\$|d" "$cache"
+    echo "$selection" >> "$cache"
+
+    db_open() {
+        entry=$(pass "$selection")
+        type=$(echo "$entry" | grep -oP 'type:\s*\K.*')
+
+        unset MYSQL_HOST MYSQL_PORT MYSQL_DATABASE MYSQL_USER MYSQL_PWD PGHOST PGPORT PGDATABASE PGUSER PGPASSWORD DATABASE_URL
+
+        if [[ "$type" == "mysql" ]]; then
+            export MYSQL_HOST=$(echo "$entry" | grep -oP 'host:\s*\K.*')
+            export MYSQL_PORT=$(echo "$entry" | grep -oP 'port:\s*\K.*')
+            export MYSQL_DATABASE=$(echo "$entry" | grep -oP 'db:\s*\K.*')
+            export MYSQL_USER=$(echo "$entry" | grep -oP 'user:\s*\K.*')
+            export MYSQL_PWD=$(echo "$entry" | head -n1)
+        else
+            export PGHOST=$(echo "$entry" | grep -oP 'host:\s*\K.*')
+            export PGPORT=$(echo "$entry" | grep -oP 'port:\s*\K.*')
+            export PGDATABASE=$(echo "$entry" | grep -oP 'db:\s*\K.*')
+            export PGUSER=$(echo "$entry" | grep -oP 'user:\s*\K.*')
+            export PGPASSWORD=$(echo "$entry" | head -n1)
+            sslmode=$(echo "$entry" | grep -oP 'sslmode:\s*\K.*' || echo require)
+            schema=$(echo "$entry" | grep -oP 'schema:\s*\K.*' || echo public)
+            export DATABASE_URL="postgres://$PGUSER:$(jq -nr --arg str "$PGPASSWORD" '$str|@uri')@$PGHOST:$PGPORT/$PGDATABASE?sslmode=$sslmode&search_path=$schema"
+        fi
+
+        export DATABASE_PROFILE="$selection"
+    }
+
+    if [[ -n "$DATABASE_PROFILE" ]]; then
+        db_open
+    else
+        ( db_open ; exec $SHELL )
+        cd "$(cat $LAST_DIR-$UID)"
+    fi
+}
+
+db-select() { BUFFER=" db"; zle accept-line; }
+zle -N db-select
+
+[[ -n "$LAST_DIR" ]] || export LAST_DIR=$(mktemp)
+precmd() { pwd > "$LAST_DIR-$UID"; }

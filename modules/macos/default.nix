@@ -3,7 +3,7 @@
   system.stateVersion = 4;
 
   imports = [
-    ../common
+    ../common/nixos
     ./homebrew.nix
     ./packages.nix
     ./system.nix

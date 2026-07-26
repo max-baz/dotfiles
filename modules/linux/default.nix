@@ -3,12 +3,11 @@
   system.stateVersion = "25.05";
 
   imports = [
-    ../common
+    ../common/nixos
     ./android.nix
     ./bluetooth.nix
     ./boot.nix
     ./btrfs.nix
-    ./calendar.nix
     ./camera.nix
     ./crypttab.nix
     ./cursor.nix

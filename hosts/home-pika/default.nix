@@ -6,24 +6,17 @@ let
     input-fonts.acceptLicense = true;
     joypixels.acceptLicense = true;
   };
-  extraArgs = {
-    _module.args.stable = import inputs.stable {
-      inherit system;
-      config = nixpkgsConfig;
-    };
-    _module.args.unstable-small = import inputs.unstable-small {
-      inherit system;
-      config = nixpkgsConfig;
-    };
-    _module.args.util = (import ../../util);
-    _module.args.firefox-addons = inputs.firefox-addons.packages.${system};
-    _module.args.waysip = inputs.waysip.packages.${system}.default;
-  };
 in
 inputs.nixpkgs.lib.nixosSystem {
+  specialArgs = {
+    stable = import inputs.stable { inherit system; config = nixpkgsConfig; };
+    unstable-small = import inputs.unstable-small { inherit system; config = nixpkgsConfig; };
+    util = (import ../../util);
+    firefox-addons = inputs.firefox-addons.packages.${system};
+    waysip = inputs.waysip.packages.${system}.default;
+  };
   modules = [
     globals
-    extraArgs
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.dell-xps-14-da14260
     inputs.sops-nix.nixosModules.sops

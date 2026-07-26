@@ -84,7 +84,6 @@
     unrar
     unzip
     vivid
-    w3m
     wireguard-tools
     yt-dlp
     zip

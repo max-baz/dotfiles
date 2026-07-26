@@ -1,8 +1,8 @@
 { config, pkgs, ... }: {
   nixpkgs.overlays = [
-    (self: super: {
-      input-fonts = super.input-fonts.overrideAttrs (_old: {
-        src = super.fetchzip {
+    (final: prev: {
+      input-fonts = prev.input-fonts.overrideAttrs (_old: {
+        src = prev.fetchzip {
           # This URL is too long for fetchzip, and returns non-reproducible zips with new sha256 every time ☹️
           # url = "https://input.djr.com/build/?customize&fontSelection=fourStyleFamily&regular=InputMonoNarrow-Regular&italic=InputMonoNarrow-Italic&bold=InputMonoNarrow-Bold&boldItalic=InputMonoNarrow-BoldItalic&a=0&g=0&i=serifs_round&l=serifs_round&zero=slash&asterisk=height&braces=0&preset=default&line-height=1.1&accept=I+do&email=";
           url = "https://max.baz.nu/share/input-fonts.zip";
@@ -11,10 +11,10 @@
         };
       });
 
-      wldash = super.wldash.override (old: {
+      wldash = prev.wldash.override (old: {
         rustPlatform = old.rustPlatform // {
           buildRustPackage = args: old.rustPlatform.buildRustPackage (args // {
-            src = super.fetchFromGitHub {
+            src = prev.fetchFromGitHub {
               owner = "cyrinux";
               repo = "wldash";
               rev = "9cc29f2507a746ef6359dd081d9f2fe2f43c2a23";
@@ -26,19 +26,19 @@
         };
       });
 
-      joypixels = super.joypixels.overrideAttrs (_old: {
+      joypixels = prev.joypixels.overrideAttrs (_old: {
         version = "11.0.0";
-        src = super.fetchurl {
+        src = prev.fetchurl {
           name = "joypixels-android.ttf";
           url = "https://max.baz.nu/share/joypixels-emoji.ttf";
           hash = "sha256-taHKy2rin1SE24BKnB8LZ662U8MO9HL5if3+mHQ38Io=";
         };
       });
 
-      pik = super.rustPlatform.buildRustPackage rec {
+      pik = prev.rustPlatform.buildRustPackage rec {
         pname = "pik";
         version = "0.9.0";
-        src = super.fetchFromGitHub {
+        src = prev.fetchFromGitHub {
           owner = "jacek-kurlit";
           repo = pname;
           rev = version;
@@ -47,29 +47,29 @@
         cargoHash = "sha256-vXE9AL0+WCPhwJTqglwOhIeqhI+JQB3Cr8GBQjmW+zc=";
       };
 
-      spicedb-zed = super.symlinkJoin {
+      spicedb-zed = prev.symlinkJoin {
         name = "spicedb-zed";
-        paths = [ super.spicedb-zed ];
-        buildInputs = [ super.makeWrapper ];
+        paths = [ prev.spicedb-zed ];
+        buildInputs = [ prev.makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/zed \
             --set PASSWORD_STORE_DIR /home/${config.user}/.password-store-local
         '';
       };
 
-      waybar-syncthing = super.stdenv.mkDerivation rec {
+      waybar-syncthing = prev.stdenv.mkDerivation rec {
         pname = "waybar-syncthing";
         version = "1.0.0";
 
         src =
           let
-            system = super.stdenv.hostPlatform.system;
+            system = prev.stdenv.hostPlatform.system;
             hashes = {
               aarch64-linux = "sha256-YJIDL+dfQbmgbgCXBOK6+3SZCgNn43ZapQVuiobqkuk=";
               x86_64-linux = "sha256-76wRXqfryMgXGA+7W50052HJUS2u9F3BaQvIlQY3RIg=";
             };
           in
-          super.fetchurl {
+          prev.fetchurl {
             url = "https://github.com/max-baz/${pname}/releases/download/${version}/${pname}-${system}-musl";
             hash = hashes.${system} or (throw "waybar-syncthing: unsupported system ${system}");
           };
@@ -86,26 +86,26 @@
         };
       };
 
-      push2talk = super.stdenv.mkDerivation rec {
+      push2talk = prev.stdenv.mkDerivation rec {
         pname = "push2talk";
         version = "1.3.3";
 
         src =
           let
-            system = super.stdenv.hostPlatform.system;
+            system = prev.stdenv.hostPlatform.system;
             hashes = {
               aarch64-linux = "sha256-Z3FtkpVVzDjNie8fY805F1j1f9GtFgngFxOWt6er68E=";
               x86_64-linux = "sha256-9VzLyZ/1FI5yAMTbQkCl6yZBygkcCLKwZ4IFvnejjG8=";
             };
           in
-          super.fetchurl {
+          prev.fetchurl {
             url = "https://github.com/cyrinux/${pname}/releases/download/${version}/${pname}-${system}";
             hash = hashes.${system} or (throw "push2talk: unsupported system ${system}");
           };
 
         dontUnpack = true;
-        nativeBuildInputs = [ super.autoPatchelfHook ];
-        buildInputs = with super; [
+        nativeBuildInputs = [ prev.autoPatchelfHook ];
+        buildInputs = with prev; [
           stdenv.cc.cc.lib
           libxkbcommon
           libinput
@@ -124,26 +124,26 @@
         };
       };
 
-      network-dmenu = super.stdenv.mkDerivation rec {
+      network-dmenu = prev.stdenv.mkDerivation rec {
         pname = "network-dmenu";
         version = "2.13.2";
 
         src =
           let
-            system = super.stdenv.hostPlatform.system;
+            system = prev.stdenv.hostPlatform.system;
             hashes = {
               aarch64-linux = "sha256-Og2Z8LiNqkNJy+AODHkDrHSdowaPSuOWeT6ZjF1S4xs=";
               x86_64-linux = "sha256-WKu+N+bS1hQz8gCkd5MiD5RwB1GwsoZD67T1K0KvuNI=";
             };
           in
-          super.fetchurl {
+          prev.fetchurl {
             url = "https://github.com/cyrinux/${pname}/releases/download/${version}/${pname}-${system}";
             hash = hashes.${system} or (throw "network-dmenu: unsupported system ${system}");
           };
 
         dontUnpack = true;
-        nativeBuildInputs = [ super.autoPatchelfHook ];
-        buildInputs = with super; [
+        nativeBuildInputs = [ prev.autoPatchelfHook ];
+        buildInputs = with prev; [
           stdenv.cc.cc.lib
           dbus
         ];
@@ -159,11 +159,11 @@
         };
       };
 
-      parcel-host = super.stdenv.mkDerivation rec {
+      parcel-host = prev.stdenv.mkDerivation rec {
         pname = "parcel-host";
         version = "1.0.2";
 
-        src = super.fetchFromGitHub {
+        src = prev.fetchFromGitHub {
           owner = "parcel-pm";
           repo = "parcel";
           rev = "v${version}";
@@ -216,10 +216,10 @@
         };
       };
 
-      nono = super.stdenv.mkDerivation rec {
+      nono = prev.stdenv.mkDerivation rec {
         pname = "nono";
         version = "0.69.0";
-        src = super.fetchurl {
+        src = prev.fetchurl {
           url = "https://github.com/nolabs-ai/nono/releases/download/v${version}/nono-v${version}-x86_64-unknown-linux-gnu.tar.gz";
           hash = "sha256-PHn7DcKpFxt9RBAmllZm9WUsQvZ7xXEKJ9jp+Sgi9hk=";
         };
@@ -231,7 +231,7 @@
           chmod +x $out/bin/nono
           runHook postInstall
         '';
-        meta = with super.lib; {
+        meta = with prev.lib; {
           description = "Sandbox any AI agent in seconds - zero setup, zero latency";
           homepage = "https://nono.sh";
           license = licenses.asl20;
