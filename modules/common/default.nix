@@ -43,7 +43,7 @@
     useUserPackages = true;
 
     # See here what bumping this value impacts: https://nix-community.github.io/home-manager/release-notes.xhtml
-    users.${config.user}.home.stateVersion = "25.05";
+    users.${config.user}.home.stateVersion = "26.05";
   };
 
   options = {
