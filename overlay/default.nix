@@ -159,51 +159,6 @@
         };
       };
 
-      jail-ai = super.stdenv.mkDerivation rec {
-        pname = "jail-ai";
-        version = "0.45.8";
-
-        src =
-          let
-            system = super.stdenv.hostPlatform.system;
-            hashes = {
-              aarch64-linux = "sha256-s/dSDRVyMQJDOv+i1Q6YgnXc3Z4M/LzG4up9C2VnzkI=";
-              x86_64-linux = "sha256-3MjxZKFfbC7jBFPp5jImbB0cQJLn94TjV6mOMujERQs=";
-            };
-          in
-          super.fetchurl {
-            url = "https://github.com/cyrinux/${pname}/releases/download/v${version}/${pname}-${system}";
-            hash = hashes.${system} or (throw "jail-ai: unsupported system ${system}");
-          };
-
-        src_ebpf_loader =
-          let
-            system = super.stdenv.hostPlatform.system;
-            hashes = {
-              aarch64-linux = "sha256-f2z9+VesRDqaxkMHwP0vBwNY8xc1h0Q7JP3e+TSigI8=";
-              x86_64-linux = "sha256-dDLsTs6WfHciZxXGz1VzHBzWBOiOS6a6vZ0i7R7mDm4=";
-            };
-          in
-          super.fetchurl {
-            url = "https://github.com/cyrinux/${pname}/releases/download/v${version}/${pname}-ebpf-loader-${system}";
-            hash = hashes.${system} or (throw "jail-ai-ebpf-loader: unsupported system ${system}");
-          };
-
-        dontUnpack = true;
-        dontStrip = true;
-
-        installPhase = ''
-          mkdir -p $out/bin
-          install -Dm755 "$src" "$out/bin/${pname}"
-          install -Dm755 "$src_ebpf_loader" "$out/bin/${pname}-ebpf-loader"
-        '';
-
-        meta = {
-          platforms = [ "aarch64-linux" "x86_64-linux" ];
-          mainProgram = pname;
-        };
-      };
-
       parcel-host = super.stdenv.mkDerivation rec {
         pname = "parcel-host";
         version = "1.0.2";
@@ -258,6 +213,30 @@
           homepage = "https://github.com/parcel-pm/parcel";
           platforms = [ "aarch64-linux" "x86_64-linux" ];
           mainProgram = "parcel-host";
+        };
+      };
+
+      nono = super.stdenv.mkDerivation rec {
+        pname = "nono";
+        version = "0.69.0";
+        src = super.fetchurl {
+          url = "https://github.com/nolabs-ai/nono/releases/download/v${version}/nono-v${version}-x86_64-unknown-linux-gnu.tar.gz";
+          hash = "sha256-PHn7DcKpFxt9RBAmllZm9WUsQvZ7xXEKJ9jp+Sgi9hk=";
+        };
+        dontUnpack = true;
+        installPhase = ''
+          runHook preInstall
+          mkdir -p $out/bin
+          tar xzf $src -C $out/bin
+          chmod +x $out/bin/nono
+          runHook postInstall
+        '';
+        meta = with super.lib; {
+          description = "Sandbox any AI agent in seconds - zero setup, zero latency";
+          homepage = "https://nono.sh";
+          license = licenses.asl20;
+          platforms = [ "x86_64-linux" ];
+          mainProgram = "nono";
         };
       };
 

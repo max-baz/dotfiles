@@ -50,6 +50,7 @@
     netcat-openbsd
     nftables
     nodejs
+    nono
     notmuch
     p7zip
     pam_u2f
@@ -57,6 +58,7 @@
     pavucontrol
     perlPackages.vidir
     pgcli
+    pi-coding-agent
     pigz
     pik
     pinentry-gnome3
