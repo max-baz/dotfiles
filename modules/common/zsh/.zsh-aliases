@@ -276,7 +276,7 @@ db() {
         db_open
     else
         ( db_open ; exec $SHELL )
-        cd "$(cat $LAST_DIR)"
+        cd "$(cat $LAST_DIR-$UID)"
     fi
 }
 
@@ -284,4 +284,4 @@ db-select() { BUFFER=" db"; zle accept-line; }
 zle -N db-select
 
 [[ -n "$LAST_DIR" ]] || export LAST_DIR=$(mktemp)
-precmd() { pwd > "$LAST_DIR"; }
+precmd() { pwd > "$LAST_DIR-$UID"; }
