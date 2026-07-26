@@ -28,12 +28,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware = {
-      url = "github:nixos/nixos-hardware";
-    };
+    # nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.url = "github:cooparo/nixos-hardware/dell-xps-14-da14260";
 
-    apple-silicon-support = {
-      url = "github:nix-community/nixos-apple-silicon";
+    apple-silicon-support.url = "github:nix-community/nixos-apple-silicon";
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-darwin = {

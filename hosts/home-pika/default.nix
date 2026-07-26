@@ -25,11 +25,14 @@ inputs.nixpkgs.lib.nixosSystem {
     globals
     extraArgs
     ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.dell-xps-14-da14260
     inputs.sops-nix.nixosModules.sops
     inputs.dotfiles-private.nixosModules.linux
     inputs.home-manager.nixosModules.home-manager
     ../../modules/linux
     ../../modules/hardware/intel-graphics.nix
+    inputs.lanzaboote.nixosModules.lanzaboote
+    ../../modules/hardware/secure-boot.nix
     {
       personal.enable = true;
 
