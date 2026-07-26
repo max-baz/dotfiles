@@ -14,10 +14,19 @@
             )
           )
 
+          (defalias
+            assistant-rsuper
+            (multi
+              (release-key lmet)
+              (release-key lalt)
+              (release-key lsft)
+              rmet))
+
           (deflayermap (main)
             lmeta (multi lmeta lalt)
             caps (t! charmod esc lctl)
             spc (t! charmod spc lmet)
+            f23 @assistant-rsuper
           )
         '';
       };
