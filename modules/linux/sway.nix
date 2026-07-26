@@ -27,7 +27,7 @@
       checkConfig = false;
 
       extraConfig = ''
-        set $screen_laptop 'Apple Computer Inc Color LCD Unknown'
+        set $screen_laptop eDP-1
         bindswitch --locked lid:off output $screen_laptop dpms on
         bindswitch --locked lid:on  output $screen_laptop dpms off, exec brightnessctl set -d kbd_backlight 0
 
