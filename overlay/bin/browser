@@ -2,7 +2,7 @@
 
 url="$1"
 url_encoded="$(jq -nr --arg input "$url" '$input|@uri')"
-containers="$(jq -r '.identities[] | select (.public) | .name' $HOME/.mozilla/firefox/default/containers.json 2> /dev/null | awk 'BEGIN{print ""} {print "firefox ("$0")"}')"
+containers="$(jq -r '.identities[] | select (.public) | .name' $HOME/.config/mozilla/firefox/default/containers.json 2> /dev/null | awk 'BEGIN{print ""} {print "firefox ("$0")"}')"
 menu=$(printf "firefox%s\nchromium\ncopy to clipboard\nplay" "$containers" | dmenu -p browser)
 
 case $menu in
