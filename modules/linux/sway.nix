@@ -97,6 +97,8 @@
         mode $mode_workspaces_monitors {
             bindsym --to-code {
                 h exec swaymsg move workspace to output left, mode "default"
+                j exec swaymsg move workspace to output down, mode "default"
+                k exec swaymsg move workspace to output up, mode "default"
                 l exec swaymsg move workspace to output right, mode "default"
 
                 # back to normal: Enter or Escape
