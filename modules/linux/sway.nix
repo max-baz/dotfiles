@@ -126,7 +126,14 @@
         };
 
         seat."*".hide_cursor = "10000";
-        output."*".bg = "#1a1c1c solid_color";
+        output = {
+          "*".bg = "#1a1c1c solid_color";
+          "DP-1" = {
+            position = "0 0";
+            scale = "1.5";
+          };
+          "eDP-1".position = "600 1440";
+        };
 
         gaps = {
           inner = 5;
