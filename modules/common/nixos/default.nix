@@ -1,5 +1,7 @@
 { config, lib, ... }: {
   imports = [
+    ../../../overlay
+
     ./base-packages.nix
     ./nix.nix
     ./tailscale.nix

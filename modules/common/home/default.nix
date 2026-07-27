@@ -7,6 +7,7 @@
     ./bat.nix
     ./bottom.nix
     ./chromium.nix
+    ./cloud.nix
     ./db.nix
     ./direnv.nix
     ./docker.nix

@@ -1,118 +1,43 @@
 { config, pkgs, waysip, unstable-small, ... }: {
   home-manager.users.${config.user}.home.packages = with pkgs; [
     abiword
-    asahi-bless
-    awscli
-    azure-cli
-    bfs
-    brightnessctl
     calibre
-    cargo
-    cargo-outdated
-    curlie
-    dbmate
-    dfrs
-    doggo
-    dos2unix
-    dua
-    earlyoom
-    editorconfig-core-c
-    eza
-    fd
     ff2mpv-rust
-    ffmpeg
-    file
     freerdp
-    fzf
-    gcc
-    git
-    github-cli
-    glib
-    gnumake
     gnumeric
-    go
-    goimapnotify
     grim
     hyprpicker
-    inotify-tools
     iptables-nftables-compat
-    isync
-    jq
-    just
-    kitty
     krita
-    libnotify
     magic-wormhole-rs
-    mariadb.client
-    maximbaz-scripts
     meld
-    msmtp
-    netcat-openbsd
     nftables
-    nodejs
-    nono
-    notmuch
-    p7zip
     pam_u2f
-    pass
     pavucontrol
-    perlPackages.vidir
-    pgcli
-    pi-coding-agent
-    pigz
-    pik
     pinentry-gnome3
     playerctl
-    postgresql_17
-    prettier
-    progress
     pulseaudio
     push2talk
-    pwgen
-    python3
     qalculate-gtk
-    qrencode
-    rsync
     signal-desktop
     sipcalc
     sleek-todo
     slurp
-    socat
-    sops
-    spicedb-zed
-    sqlite
     swaybg
     swaylock
     swayr
-    syncthing
     systembus-notify
     tailspin
-    teehee
-    tig
-    todo-txt-cli
     trash-cli
-    tree
     udiskie
-    unrar
     unstable-small.ttl
-    unzip
     usbguard
     vault-bin
     vimiv-qt
-    vivid
     waysip
     wev
     wf-recorder
-    whisper-cpp-vulkan
-    wireguard-tools
-    wl-clipboard
     wldash
-    yarn
-    yazi
-    yq-go
-    yubikey-manager
     zathura
-    zip
-    zsh
   ];
 }

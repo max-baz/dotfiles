@@ -26,7 +26,7 @@
     just
     libnotify
     magic-wormhole-rs
-    # maximbaz-scripts
+    maximbaz-scripts
     netcat-openbsd
     # nftables
     nodejs
@@ -59,7 +59,7 @@
     # swaybg
     # swaylock
     # swayr
-    # syncthing
+    syncthing
     # systembus-notify
     # tailspin
     teehee

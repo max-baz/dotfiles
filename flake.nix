@@ -73,18 +73,32 @@
   };
 
   outputs = inputs:
-    let globals = { user = "max"; }; in rec {
+    let
+      nixpkgsConfig = {
+        allowUnfree = true;
+        input-fonts.acceptLicense = true;
+        joypixels.acceptLicense = true;
+      };
+      mkModuleArgs = system: {
+        nixgl = inputs.nixgl;
+        stable = import inputs.stable { inherit system; config = nixpkgsConfig; };
+        unstable-small = import inputs.unstable-small { inherit system; config = nixpkgsConfig; };
+        util = import ./util;
+        firefox-addons = inputs.firefox-addons.packages.${system};
+        waysip = inputs.waysip.packages.${system}.default;
+      };
+      hostArgs = { inherit inputs nixpkgsConfig mkModuleArgs; };
+    in
+    rec {
       nixosConfigurations = {
-        home-titan = import ./hosts/home-titan { inherit inputs globals; };
-        home-pika = import ./hosts/home-pika { inherit inputs globals; };
+        home-pika = import ./hosts/home-pika hostArgs;
       };
 
       darwinConfigurations = { };
 
       homeConfigurations = {
-        home-titan = nixosConfigurations.home-titan.config.home-manager.users.${globals.user}.home;
-        home-pika = nixosConfigurations.home-pika.config.home-manager.users.${globals.user}.home;
-        work-xps14 = import ./hosts/work-xps14 { inherit inputs; };
+        home-pika = nixosConfigurations.home-pika.config.home-manager.users.${nixosConfigurations.home-pika.config.user}.home;
+        work-xps14 = import ./hosts/work-xps14 hostArgs;
       };
     };
 }
