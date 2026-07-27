@@ -21,6 +21,7 @@
     ./keyboard.nix
     ./network.nix
     ./network-dmenu.nix
+    ./nix-ld.nix
     ./nix-serve.nix
     ./ozone.nix
     ./packages.nix
