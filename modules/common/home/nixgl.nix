@@ -4,7 +4,7 @@
   targets.genericLinux.nixGL.defaultWrapper = "mesa";
 
   home.packages = [
-    nixgl.packages.${pkgs.system}.nixGLIntel
+    nixgl.packages.${pkgs.stdenv.hostPlatform.system}.nixGLIntel
   ];
 
   # Force Mesa to enable driver support for newer Intel GPUs
