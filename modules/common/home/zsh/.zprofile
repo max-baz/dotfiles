@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-# source /etc/profiles/per-user/max/etc/profile.d/hm-session-vars.sh
-source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+for f in /etc/profiles/per-user/max/etc/profile.d/hm-session-vars.sh $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh; do
+    [ ! -f "$f" ] || source "$f"
+done
 
 [[ "$TTY" == /dev/tty* ]] || return 0
 
