@@ -97,7 +97,10 @@
       darwinConfigurations = { };
 
       homeConfigurations = {
-        home-pika = nixosConfigurations.home-pika.config.home-manager.users.${nixosConfigurations.home-pika.config.user}.home;
+        home-pika = let config = nixosConfigurations.home-pika.config.home-manager.users.${nixosConfigurations.home-pika.config.user}; in {
+          inherit config;
+          activationPackage = config.home.activationPackage;
+        };
         work-xps14 = import ./hosts/work-xps14 hostArgs;
       };
     };
