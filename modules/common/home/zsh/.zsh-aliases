@@ -17,7 +17,7 @@ command -v eza       &> /dev/null    && alias lm='ll -s=modified'               
 command -v doggo     &> /dev/null    && alias d='doggo'                                            || alias d='dig +nocmd +multiline +noall +answer'
 command -v w3mman    &> /dev/null    && alias man='w3mman'
 command -v pgcli     &> /dev/null    && alias pgcli='env LESS= pgcli'
-command -v nono      &> /dev/null    && alias pi='env JITI_FS_CACHE=0 nono run --profile pi --allow-cwd -- pi'
+command -v nono      &> /dev/null    && alias pi='env JITI_FS_CACHE=0 nono run --profile pi --allow-cwd --allow /tmp -- pi'
 command -v kubecolor &> /dev/null    && alias kubectl='kubecolor' && compdef -- -z4h-complete-kubectl kubecolor
 
 command -v nixGLIntel &> /dev/null    && alias mpv='nixGLIntel mpv'
