@@ -30,7 +30,7 @@
 
     keybindings = {
       "kitty_mod+b" = "launch --type overlay --stdin-source=@screen_scrollback hx";
-      "kitty_mod+n" = if pkgs.stdenv.isLinux then "new_tab_with_cwd cglaunch kitty --detach" else "new_os_window_with_cwd";
+      "kitty_mod+n" = if pkgs.stdenv.isLinux then "launch --type=background --cwd=current cglaunch kitty --detach" else "new_os_window_with_cwd";
       "kitty_mod+u" = '' launch --type window --allow-remote-control sh -c 'kitty @ send-text -m id:1 "\e[200~$(emoji-dmenu -k overlay)\e[201~"' '';
       "kitty_mod+г" = '' launch --type window --allow-remote-control sh -c 'kitty @ send-text -m id:1 "\e[200~$(emoji-dmenu -k overlay)\e[201~"' '';
       "kitty_mod+i" = '' launch --type window --allow-remote-control sh -c 'kitty @ send-text -m id:1 "\e[200~$(wl-clipboard-manager dmenu -k overlay)\e[201~"' '';
