@@ -13,6 +13,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
   extraSpecialArgs = moduleArgs;
   modules = [
     { user = user; }
+    ../../overlay
     inputs.nix-index-database.homeModules.nix-index
     ../../modules/common/home
     {

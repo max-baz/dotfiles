@@ -1,7 +1,5 @@
 { lib, ... }: {
   imports = [
-    ../../../overlay
-
     ./archive.nix
     ./atuin.nix
     ./bat.nix
