@@ -222,7 +222,7 @@
     typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 
     #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
-    typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|kubens|kubectx|helm'
+    typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|kubens|kubectx|helm|kubecolor'
     typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%fat '
     typeset -g POWERLEVEL9K_KUBECONTEXT_VISUAL_IDENTIFIER_EXPANSION='☸️'
 

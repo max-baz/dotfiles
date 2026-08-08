@@ -18,6 +18,7 @@ command -v doggo     &> /dev/null    && alias d='doggo'                         
 command -v w3mman    &> /dev/null    && alias man='w3mman'
 command -v pgcli     &> /dev/null    && alias pgcli='env LESS= pgcli'
 command -v jail-ai   &> /dev/null    && alias claude='jail-ai claude'
+command -v kubecolor &> /dev/null    && alias kubectl='kubecolor' && compdef kubecolor=kubectl
 
 alias e="$EDITOR"
 alias cp='cp -r --reflink=auto'

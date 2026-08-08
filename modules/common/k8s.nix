@@ -17,6 +17,8 @@
       unstable-small.talosctl
     ];
 
+    programs.kubecolor.enable = true;
+
     sops.secrets."talosconfig".path = "${config.home.homeDirectory}/.talos/config";
   };
 }
