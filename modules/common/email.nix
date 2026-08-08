@@ -14,7 +14,7 @@
 
               ---------- Forwarded message ---------
               From: {{.OriginalFrom | persons | join ", "}}
-              Date: {{dateFormat .OriginalDate "Mon Jan 2, 2006 at 3:04 PM"}}
+              Date: {{dateFormat (.OriginalDate | toLocal) "Mon, Jan 2, 2006 at 3:04 PM MST"}}
 
               {{.OriginalText}}
             '';
@@ -22,15 +22,15 @@
             quoted_reply = ''
               X-Mailer: aerc {{version}}
 
-              {{- with .Signature }}
+              {{ with .Signature -}}
               {{.}}
-              {{- end }}
 
-              On {{dateFormat (.OriginalDate | toLocal) "Mon Jan 2, 2006 at 3:04 PM MST"}}, {{.OriginalFrom | names | join ", "}} wrote:
+              {{ end -}}
+              On {{dateFormat (.OriginalDate | toLocal) "Mon, Jan 2, 2006 at 3:04 PM MST"}}, {{.OriginalFrom | persons | join ", "}} wrote:
               {{ if eq .OriginalMIMEType "text/html" -}}
-              {{- exec `html` .OriginalText | trimSignature | quote -}}
+              {{- exec `html-quote` .OriginalText | quote -}}
               {{- else -}}
-              {{- trimSignature .OriginalText | quote -}}
+              {{- .OriginalText | exec `sed 's/<[[:space:]]*https\{0,1\}:\/\/[^>]*>//g'` | quote -}}
               {{- end}}
             '';
           };
@@ -70,7 +70,6 @@
               fuzzy-complete = true;
               mouse-enabled = true;
               msglist-scroll-offset = 5;
-              show-thread-context = true;
               styleset-name = "gruvbox";
               thread-prefix-dummy = "┬";
               thread-prefix-first-child = "┬";
@@ -305,6 +304,16 @@
         aerc
         w3m
         dante
+        (writeShellScriptBin "html-quote" ''
+          exec ${w3m}/bin/w3m \
+              -I UTF-8 -O UTF-8 -T text/html \
+              -s -graph \
+              -o fold_textarea=true \
+              -o fold_line=true \
+              -o display_link=false \
+              -cols 100 -dump -o disable_center=true \
+              "$@"
+        '')
       ];
 
       systemd.user = {
