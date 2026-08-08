@@ -45,7 +45,7 @@ in
       enable = true;
       systemd.enable = true;
 
-      settings = [{
+      settings.mainBar = {
         height = 25;
 
         modules-left = [
@@ -242,7 +242,7 @@ in
           on-click = lib.getExe pkgs.pavucontrol;
           on-click-right = "${lib.getExe pkgs.push2talk} -t";
         };
-      }];
+      };
 
       style = ''
         @define-color background #1d2021;
