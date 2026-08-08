@@ -55,7 +55,6 @@
 
           general = {
             default-menu-cmd = "${pkgs.fzf}/bin/fzf";
-            enable-osc8 = true;
             pgp-provider = "gpg";
             unsafe-accounts-conf = true;
           };
