@@ -15,6 +15,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-ipu7.url = "github:NixOS/nixpkgs/23c357eb8a093f07f5cc8cf76d23f1c4ab05b5c1";
     stable.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixgl.url = "github:nix-community/nixGL";
