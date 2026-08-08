@@ -59,14 +59,14 @@
 
       waybar-syncthing = prev.stdenv.mkDerivation rec {
         pname = "waybar-syncthing";
-        version = "1.0.0";
+        version = "1.1.0";
 
         src =
           let
             system = prev.stdenv.hostPlatform.system;
             hashes = {
               aarch64-linux = "sha256-YJIDL+dfQbmgbgCXBOK6+3SZCgNn43ZapQVuiobqkuk=";
-              x86_64-linux = "sha256-76wRXqfryMgXGA+7W50052HJUS2u9F3BaQvIlQY3RIg=";
+              x86_64-linux = "sha256-dDhHvH6n07pAR8svodLbMHatahK0Z8ms9iJDD/vSSYM=";
             };
           in
           prev.fetchurl {

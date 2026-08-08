@@ -76,6 +76,10 @@ in
 
         "custom/syncthing" = {
           exec = "${lib.getExe pkgs.waybar-syncthing} --api-key ${config.sops.secrets."syncthing-api-key".path}";
+          format = "{icon}{text}";
+          format-icons = {
+            progress = " ";
+          };
           return-type = "json";
         };
 
