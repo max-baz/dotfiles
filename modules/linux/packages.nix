@@ -63,6 +63,7 @@
     pinentry-gnome3
     playerctl
     postgresql_17
+    prettier
     progress
     pulseaudio
     push2talk
@@ -73,6 +74,7 @@
     rsync
     signal-desktop
     sipcalc
+    sleek-todo
     slurp
     socat
     sops
@@ -87,6 +89,7 @@
     tailspin
     teehee
     tig
+    todo-txt-cli
     trash-cli
     tree
     udiskie

@@ -307,6 +307,13 @@
           auto-format = true;
         }
         {
+          name = "todotxt";
+          formatter = {
+            command = "env";
+            args = [ "LC_ALL=C" "sort" ];
+          };
+        }
+        {
           name = "toml";
           language-servers = [ "taplo" ];
           formatter = {
