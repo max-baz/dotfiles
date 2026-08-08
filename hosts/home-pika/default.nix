@@ -24,18 +24,16 @@ inputs.nixpkgs.lib.nixosSystem {
   modules = [
     globals
     extraArgs
-    ./firmware.nix
     ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.apple-t2
     inputs.sops-nix.nixosModules.sops
     inputs.dotfiles-private.nixosModules.linux
     inputs.home-manager.nixosModules.home-manager
     ../../modules/linux
-    ../../modules/hardware/t2.nix
+    ../../modules/hardware/intel-graphics.nix
     {
       personal.enable = true;
 
-      networking.hostName = "home-titan";
+      networking.hostName = "home-pika";
 
       home-manager.users.${globals.user}.imports = [
         inputs.sops-nix.homeManagerModules.sops

@@ -17,6 +17,7 @@
     ./earlyoom.nix
     ./flipper.nix
     ./fstrim.nix
+    ./fuse.nix
     ./i18n.nix
     ./jail-ai.nix
     ./keyboard.nix

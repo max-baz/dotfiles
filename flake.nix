@@ -73,12 +73,14 @@
     let globals = { user = "max"; }; in rec {
       nixosConfigurations = {
         home-titan = import ./hosts/home-titan { inherit inputs globals; };
+        home-pika = import ./hosts/home-pika { inherit inputs globals; };
       };
 
       darwinConfigurations = { };
 
       homeConfigurations = {
         home-titan = nixosConfigurations.home-titan.config.home-manager.users.${globals.user}.home;
+        home-pika = nixosConfigurations.home-pika.config.home-manager.users.${globals.user}.home;
       };
     };
 }
