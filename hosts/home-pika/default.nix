@@ -55,6 +55,7 @@ inputs.nixpkgs.lib.nixosSystem {
         '';
 
         systemd.services.ipu7-camera-relay = {
+          after = [ "gphoto2-v4l2loopback.service" ];
           description = lib.mkForce "Intel IPU7 camera to v4l2loopback relay (hardware ISP via camera HAL)";
           environment = {
             GST_PLUGIN_PATH = lib.mkForce gstPluginPath;

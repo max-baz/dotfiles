@@ -1,12 +1,27 @@
-{ config, ... }: {
+{ config, lib, ... }:
+let
+  v4l2loopback-ctl = "${config.boot.kernelPackages.v4l2loopback.bin}/bin/v4l2loopback-ctl";
+in
+{
   programs.gphoto2.enable = true;
+
   users.users.${config.user}.extraGroups = [ "camera" ];
 
   boot = {
     kernelModules = [ "v4l2loopback" ];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-    extraModprobeConfig = ''
-      options v4l2loopback video_nr=10 card_label="gphoto2" exclusive_caps=1 max_buffers=2
-    '';
+    extraModprobeConfig = lib.mkDefault "options v4l2loopback devices=0";
+  };
+
+  systemd.services.gphoto2-v4l2loopback = {
+    description = "gPhoto2 v4l2loopback device";
+    after = [ "modprobe@v4l2loopback.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${v4l2loopback-ctl} add -b 2 -x 1 -n gphoto2 /dev/video99";
+      ExecStop = "${v4l2loopback-ctl} delete /dev/video99";
+    };
   };
 }
