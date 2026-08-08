@@ -74,10 +74,10 @@ case "$subcommand" in
             trap 'rm $file' EXIT
 
             query "SELECT writefile('$file', contents) FROM entries WHERE id='$id'" > /dev/null
-            case "$*" in
-                *overlay*) cat "$file" ;;
-                *) wl-copy < "$file" ;;
-            esac
+            wl-copy < "$file"
+            if [[ "$*" == *overlay* ]]; then
+                cat "$file"
+            fi
         }
         ;;
 
@@ -90,7 +90,7 @@ case "$subcommand" in
         file="$(mktemp)"
         trap 'rm $file' EXIT
 
-        mime="$(query "SELECT mime, writefile('$file', contents) FROM entries WHERE id='$id'" | awk 'NR == 1 { print $3 }')"
+        mime="$(query "SELECT mime, writefile('$file', contents) FROM entries WHERE id='$id'" | awk 'NR == 1 { print $2 }')"
 
         if [[ "$mime" == image/* ]]; then
             kitty +kitten icat --silent < "$file"
