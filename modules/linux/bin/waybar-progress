@@ -2,6 +2,6 @@
 
 output="$(progress -q)"
 text="$(printf "%s" "$output" | sed 's/\[[^]]*\] //g' | awk 'BEGIN { ORS=" " } NR%3==1 { op=$1 } NR%3==2 { pct=($1+0); if (op != "gpg" && op != "coreutils" && pct > 0 && pct < 100) { print op, $1 } }')"
-tooltip="$(printf "%s" "$output" | perl -pe 's/\n/\\n/g' | perl -pe 's/(?:\\n)+$//')"
+tooltip="$(printf "%s" "$output" | perl -pe 's/\n/\\n/g; s/\t/\\t/g' | perl -pe 's/(?:\\n)+$//')"
 
 printf '{"text": "%s", "tooltip": "%s"}\n' "$text" "$tooltip"
