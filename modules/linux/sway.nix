@@ -363,15 +363,15 @@
 
         startup = [
           {
-            command = "cggrep aerc || cglaunch --term aerc";
+            command = "sleep 30s && cggrep aerc || cglaunch --term aerc";
             always = true;
           }
           {
-            command = "cggrep signal-desktop || cglaunch signal-desktop --js-flags=--no-decommit-pooled-pages";
+            command = "sleep 30s && cggrep signal-desktop || cglaunch signal-desktop --js-flags=--no-decommit-pooled-pages";
             always = true;
           }
           {
-            command = "cggrep thunderbird || cglaunch thunderbird";
+            command = "sleep 30s && cggrep thunderbird || cglaunch thunderbird";
             always = true;
           }
         ];
