@@ -315,6 +315,7 @@ in
 
         #mode,
         #pulseaudio,
+        #custom-syncthing,
         #custom-usbguard,
         #custom-yubikey,
         #custom-decrypted,
@@ -352,6 +353,7 @@ in
         #custom-systemd,
         #custom-usbguard,
         #custom-yubikey,
+        #custom-syncthing,
         #disk,
         #memory,
         #mode,
