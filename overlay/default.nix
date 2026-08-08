@@ -27,11 +27,11 @@
       });
 
       joypixels = super.joypixels.overrideAttrs (_old: {
-        version = "10.0.0";
+        version = "11.0.0";
         src = super.fetchurl {
           name = "joypixels-android.ttf";
           url = "https://max.baz.nu/share/joypixels-emoji.ttf";
-          hash = "sha256-T4vBPTdXDxnD72n+XKeGeyKomVG22UTRlOymobzqHv4=";
+          hash = "sha256-taHKy2rin1SE24BKnB8LZ662U8MO9HL5if3+mHQ38Io=";
         };
       });
 
