@@ -22,7 +22,9 @@
       sql-formatter
       ruff
       (python3.withPackages (p: (with p; [
-        python-lsp-ruff
+        (python-lsp-ruff.overridePythonAttrs (_old: {
+          doCheck = false;
+        }))
         python-lsp-server
       ])))
       rust-analyzer
