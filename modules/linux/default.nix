@@ -18,6 +18,7 @@
     ./fstrim.nix
     ./fuse.nix
     ./i18n.nix
+    ./iio.nix
     ./keyboard.nix
     ./network.nix
     ./network-dmenu.nix
