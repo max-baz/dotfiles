@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   programs.kitty = {
     enable = true;
-    package = config.lib.nixGL.wrap pkgs.kitty;
+    package = if config.targets.genericLinux.enable then config.lib.nixGL.wrap pkgs.kitty else pkgs.kitty;
     themeFile = "gruvbox-dark-hard";
     font = {
       name = "Input";

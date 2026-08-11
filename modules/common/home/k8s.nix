@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable-small, ... }: {
+{ config, isNixOS, lib, pkgs, unstable-small, ... }: {
   home.packages = with pkgs; [
     argocd
     cilium-cli
@@ -18,6 +18,7 @@
 
   programs.kubecolor.enable = true;
 
+} // lib.optionalAttrs isNixOS {
   sops.secrets."talosconfig" = lib.mkIf config.personal.enable {
     path = "${config.home.homeDirectory}/.talos/config";
   };

@@ -10,7 +10,7 @@ let
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
-  extraSpecialArgs = moduleArgs;
+  extraSpecialArgs = moduleArgs // { isNixOS = false; };
   modules = [
     { user = user; }
     ../../overlay

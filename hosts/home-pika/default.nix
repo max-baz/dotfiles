@@ -70,7 +70,7 @@ inputs.nixpkgs.lib.nixosSystem {
         networking.hostName = "home-pika";
 
         home-manager = {
-          extraSpecialArgs = moduleArgs;
+          extraSpecialArgs = moduleArgs // { isNixOS = true; };
 
           users.${user} = {
             personal.enable = true;
