@@ -388,7 +388,7 @@
               always = true;
             }
             {
-              command = "cggrep sleek || cglaunch sleek";
+              command = "cggrep sleek-todo || cglaunch sleek-todo";
               always = true;
             }
           ];
