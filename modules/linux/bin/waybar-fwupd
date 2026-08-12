@@ -1,0 +1,24 @@
+#!/bin/sh
+
+updates="$(fwupdmgr get-updates --json 2>/dev/null)"
+
+if [ -z "$updates" ]; then
+    printf '{"text": ""}\n'
+    exit
+fi
+
+printf '%s\n' "$updates" | jq --compact-output '
+    [.Devices[]? | {
+        name: (.Name // "Unknown device"),
+        current: (.Version // "unknown"),
+        available: ([.Releases[]?.Version] | first // "unknown")
+    }] as $updates |
+    if ($updates | length) == 0 then
+        { text: "" }
+    else
+        {
+            text: (" " + (($updates | length) | tostring)),
+            tooltip: ("Firmware updates available:\n\n" + ($updates | map(.name + ": " + .current + " → " + .available) | join("\n")))
+        }
+    end
+'

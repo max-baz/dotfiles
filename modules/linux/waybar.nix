@@ -4,6 +4,7 @@ let
     name = "waybar-scripts";
     paths = with pkgs; [
       (writeShellScriptBin "waybar-decrypted" (builtins.readFile ./bin/waybar-decrypted))
+      (writeShellScriptBin "waybar-fwupd" (builtins.readFile ./bin/waybar-fwupd))
       (writeShellScriptBin "waybar-mail" (builtins.readFile ./bin/waybar-mail))
       (writeShellScriptBin "waybar-progress" (builtins.readFile ./bin/waybar-progress))
       (writeShellScriptBin "waybar-recording" (builtins.readFile ./bin/waybar-recording))
@@ -17,6 +18,7 @@ let
       gnugrep
       gnused
       inotify-tools
+      jq
       netcat-openbsd
       notmuch
       perl
@@ -28,6 +30,7 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/waybar-decrypted     --prefix PATH : $out/bin
+      wrapProgram $out/bin/waybar-fwupd         --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-mail          --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-progress      --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-recording     --prefix PATH : $out/bin
@@ -59,6 +62,7 @@ in
           "custom/usbguard"
           "custom/yubikey"
           "custom/decrypted"
+          "custom/fwupd"
           "custom/systemd"
           "custom/mail"
           "custom/recording"
@@ -108,6 +112,12 @@ in
         "custom/decrypted" = {
           exec = "${app}/bin/waybar-decrypted";
           return-type = "json";
+        };
+
+        "custom/fwupd" = {
+          exec = "${app}/bin/waybar-fwupd";
+          return-type = "json";
+          interval = 3600;
         };
 
         "custom/systemd" = {
@@ -291,6 +301,7 @@ in
         #custom-usbguard,
         #custom-decrypted,
         #custom-mail,
+        #custom-fwupd,
         #battery.warning,
         #disk.warning,
         #memory.warning,
@@ -323,6 +334,7 @@ in
         #custom-usbguard,
         #custom-yubikey,
         #custom-decrypted,
+        #custom-fwupd,
         #custom-systemd,
         #custom-mail,
         #network,
@@ -354,6 +366,7 @@ in
         #custom-mail,
         #custom-progress,
         #custom-recording,
+        #custom-fwupd,
         #custom-systemd,
         #custom-usbguard,
         #custom-yubikey,
