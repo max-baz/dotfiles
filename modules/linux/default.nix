@@ -12,6 +12,7 @@
     ./crypttab.nix
     ./cursor.nix
     ./dbus.nix
+    ./ddc.nix
     ./docker.nix
     ./earlyoom.nix
     ./flipper.nix
