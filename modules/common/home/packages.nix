@@ -19,7 +19,6 @@
     github-cli
     glib
     gnumake
-    go
     inotify-tools
     # iptables-nftables-compat
     jq

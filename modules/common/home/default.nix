@@ -15,6 +15,7 @@
     ./git.nix
     ./gocryptfs.nix
     ./gpg.nix
+    ./go.nix
     ./gtk.nix
     ./helix.nix
     ./k8s.nix
