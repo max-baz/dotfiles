@@ -83,6 +83,8 @@
 
       push.default = "current";
 
+      url."git@github.com:".insteadOf = "https://github.com/";
+
       rebase = {
         autostash = true;
         autosquash = true;
