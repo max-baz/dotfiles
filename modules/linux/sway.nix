@@ -289,8 +289,9 @@
 
             # Brightness control
             "--locked XF86MonBrightnessUp" = "exec brightnessctl set -- +1%";
+            "--locked Shift+XF86MonBrightnessUp" = "exec brightnessctl set -- +5%";
             "--locked XF86MonBrightnessDown" = "exec brightnessctl set -- -1%";
-            # "--locked XF86KbdLightOnOff" = "exec if [ $(brightnessctl -d kbd_backlight get) -eq 0 ]; then brightnessctl set -d kbd_backlight 100%; else brightnessctl set -d kbd_backlight 0%; fi";
+            "--locked Shift+XF86MonBrightnessDown" = "exec brightnessctl set -- -5%";
 
             # Media control
             "--locked XF86AudioPlay" = "exec playerctl --player playerctld play-pause";
