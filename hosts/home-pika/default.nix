@@ -17,6 +17,13 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/hardware/intel-graphics.nix
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../modules/hardware/secure-boot.nix
+    (
+      { pkgs, ... }:
+      {
+        boot.kernelPackages = pkgs.linuxPackages_7_1;
+        hardware.dell-xps-14-da14260.speakerTuning.enable = true;
+      }
+    )
     {
       networking.hostName = "home-pika";
 
