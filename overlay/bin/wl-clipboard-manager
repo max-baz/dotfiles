@@ -48,6 +48,7 @@ case "$subcommand" in
 
     on-copy)
         [ -f .lock ] && exit 0
+        [ "${CLIPBOARD_STATE:-}" = sensitive ] && exit 0
 
         file="$(mktemp)"
         trap 'rm $file' EXIT
