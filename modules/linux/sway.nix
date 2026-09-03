@@ -240,6 +240,8 @@
             "${hyper}+XF86MonBrightnessUp" = "exec cgtoggle emoji-dmenu";
             "${hyper}+Escape" = "exec cglaunch screenshot-area";
             "${win}+Escape" = "exec cglaunch record-area";
+            "Print" = "exec cglaunch screenshot-area";
+            "${win}+Print" = "exec cglaunch record-area";
             "${win}+i" = "exec cglaunch ${lib.getExe pkgs.hyprpicker} -al";
 
             # Kill focused window
