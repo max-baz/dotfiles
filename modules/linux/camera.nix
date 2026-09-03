@@ -8,13 +8,13 @@ in
   users.users.${config.user}.extraGroups = [ "camera" ];
 
   boot = {
-    kernelModules = [ "v4l2loopback" ];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     extraModprobeConfig = lib.mkDefault "options v4l2loopback devices=0";
   };
 
   systemd.services.gphoto2-v4l2loopback = {
     description = "gPhoto2 v4l2loopback device";
+    wants = [ "modprobe@v4l2loopback.service" ];
     after = [ "modprobe@v4l2loopback.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
