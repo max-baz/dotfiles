@@ -1,7 +1,7 @@
 { pkgs, firefox-addons, ... }: {
   programs.firefox = {
     enable = true;
-    package = if pkgs.stdenv.isDarwin then pkgs.firefox-bin else pkgs.firefox;
+    package = if pkgs.stdenv.hostPlatform.isDarwin then pkgs.firefox-bin else pkgs.firefox;
     nativeMessagingHosts = with pkgs; [ ff2mpv-rust ];
     profiles.default = {
       userChrome = ''

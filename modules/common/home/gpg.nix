@@ -11,13 +11,13 @@
     };
   };
 
-  services.gpg-agent = lib.mkIf pkgs.stdenv.isLinux {
+  services.gpg-agent = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
     enable = true;
     enableSshSupport = true;
     pinentry.package = pkgs.pinentry-gnome3;
   };
 
-  home.file = lib.mkIf pkgs.stdenv.isDarwin {
+  home.file = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
     ".gnupg/gpg-agent.conf".text = ''
       enable-ssh-support
       pinentry-program ${lib.getExe pkgs.pinentry_mac}

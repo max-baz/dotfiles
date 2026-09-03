@@ -5,7 +5,7 @@
     themeFile = "gruvbox-dark-hard";
     font = {
       name = "Input";
-      size = if pkgs.stdenv.isLinux then 9 else 12;
+      size = if pkgs.stdenv.hostPlatform.isLinux then 9 else 12;
     };
 
     settings = {
@@ -13,7 +13,7 @@
       close_on_child_death = true;
       cursor_shape = "beam";
       enable_audio_bell = false;
-      listen_on = if pkgs.stdenv.isLinux then "unix:@kitty" else "unix:/tmp/kitty";
+      listen_on = if pkgs.stdenv.hostPlatform.isLinux then "unix:@kitty" else "unix:/tmp/kitty";
       mouse_hide_wait = 0;
       scrollback_lines = 100000;
       strip_trailing_spaces = "always";
@@ -30,7 +30,7 @@
 
     keybindings = {
       "kitty_mod+b" = "launch --type overlay --stdin-source=@screen_scrollback hx";
-      "kitty_mod+n" = if pkgs.stdenv.isLinux then "launch --type=background --cwd=current cglaunch kitty --detach" else "new_os_window_with_cwd";
+      "kitty_mod+n" = if pkgs.stdenv.hostPlatform.isLinux then "launch --type=background --cwd=current cglaunch kitty --detach" else "new_os_window_with_cwd";
       "kitty_mod+u" = '' launch --type window --allow-remote-control sh -c 'kitty @ send-text -m id:1 "\e[200~$(emoji-dmenu -k overlay)\e[201~"' '';
       "kitty_mod+г" = '' launch --type window --allow-remote-control sh -c 'kitty @ send-text -m id:1 "\e[200~$(emoji-dmenu -k overlay)\e[201~"' '';
       "kitty_mod+i" = '' launch --type window --allow-remote-control sh -c 'kitty @ send-text -m id:1 "\e[200~$(wl-clipboard-manager dmenu -k overlay)\e[201~"' '';

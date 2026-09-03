@@ -14,7 +14,7 @@
 
     mpv = {
       enable = true;
-      scripts = lib.mkIf pkgs.stdenv.isLinux [
+      scripts = lib.mkIf pkgs.stdenv.hostPlatform.isLinux [
         pkgs.mpvScripts.mpris
         pkgs.mpvScripts.mpris
         pkgs.mpvScripts.uosc

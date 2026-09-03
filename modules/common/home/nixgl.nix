@@ -1,5 +1,5 @@
 { isNixOS, lib, nixgl, pkgs, ... }:
-let enable = pkgs.stdenv.isLinux && !isNixOS;
+let enable = pkgs.stdenv.hostPlatform.isLinux && !isNixOS;
 in {
   targets.genericLinux.enable = enable;
   targets.genericLinux.nixGL.packages = lib.mkIf enable nixgl.packages;
