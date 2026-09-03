@@ -138,8 +138,10 @@
             "DP-1" = {
               position = "0 0";
               scale = "1.5";
+              transform = "270";
+              hdr = "on";
             };
-            "eDP-1".position = "0 1440";
+            "eDP-1".position = "0 2560";
           };
 
           gaps = {
