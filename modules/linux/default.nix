@@ -8,7 +8,6 @@
     ./bluetooth.nix
     ./boot.nix
     ./btrfs.nix
-    ./camera.nix
     ./crypttab.nix
     ./cursor.nix
     ./dbus.nix
