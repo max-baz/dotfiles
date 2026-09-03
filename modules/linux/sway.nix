@@ -4,6 +4,8 @@
     wrapperFeatures.gtk = true;
   };
 
+  environment.sessionVariables.WLR_RENDERER = "vulkan";
+
   home-manager.users.${config.user} = {
     home.packages = with pkgs; [
       brightnessctl
