@@ -48,5 +48,6 @@
     ./workstyle.nix
     ./xdg.nix
     ./yubikey.nix
+    ./zathura.nix
   ];
 }
