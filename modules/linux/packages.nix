@@ -38,6 +38,5 @@
     wev
     wf-recorder
     wldash
-    zathura
   ];
 }
