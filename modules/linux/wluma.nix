@@ -9,7 +9,7 @@
   '';
 
   home-manager.users.${config.user} = {
-    home.packages = with pkgs; [ wluma ddcutil ];
+    home.packages = with pkgs; [ wluma ddcutil ddcutil-service ];
 
     systemd.user.services.wluma = util.systemdService {
       Description = "wluma";

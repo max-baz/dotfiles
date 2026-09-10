@@ -26,6 +26,21 @@
         };
       });
 
+      wluma = prev.wluma.overrideAttrs (old: rec {
+        version = "5.0.0";
+        src = prev.fetchFromGitHub {
+          owner = "max-baz";
+          repo = "wluma";
+          rev = version;
+          hash = "sha256-MN5KxodnQPMwKZzvpA+zLnsp+uX6h2OtS7cduRR6fp8=";
+        };
+        cargoDeps = prev.rustPlatform.fetchCargoVendor {
+          inherit src;
+          hash = "sha256-9TEC2+GcPXWfGTU/KTu6LSGbjAkWchPRBalmOkg9PI4=";
+        };
+        buildInputs = old.buildInputs ++ [ prev.pipewire ];
+      });
+
       joypixels = prev.joypixels.overrideAttrs (_old: {
         version = "11.0.0";
         src = prev.fetchurl {
