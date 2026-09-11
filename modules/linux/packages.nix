@@ -21,7 +21,6 @@
     qalculate-gtk
     signal-desktop
     sipcalc
-    sleek-todo
     slurp
     swaybg
     swaylock

@@ -30,6 +30,7 @@
     ./syncthing.nix
     ./thunderbird.nix
     ./tig.nix
+    ./todotxt.nix
     ./vimiv.nix
     ./vscode.nix
     ./w3m.nix

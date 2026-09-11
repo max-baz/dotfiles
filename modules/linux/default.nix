@@ -1,4 +1,6 @@
-{
+{ config, ... }: {
+  home-manager.users.${config.user}.imports = [ ./home ];
+
   # version of *installation*, do not edit on installed system!
   system.stateVersion = "25.05";
 

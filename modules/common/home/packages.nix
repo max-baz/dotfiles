@@ -17,6 +17,7 @@
     gcc
     git
     github-cli
+    github-copilot-cli
     glib
     gnumake
     inotify-tools
@@ -48,7 +49,6 @@
     rsync
     # signal-desktop
     # sipcalc
-    # sleek-todo
     # slurp
     socat
     sops
@@ -63,7 +63,6 @@
     # tailspin
     teehee
     tig
-    todo-txt-cli
     # trash-cli
     tree
     # udiskie

@@ -16,6 +16,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ../../overlay
     inputs.nix-index-database.homeModules.nix-index
     ../../modules/common/home
+    ../../modules/linux/home
     {
       home.username = user;
       home.homeDirectory = "/home/${user}";
