@@ -10,6 +10,7 @@ let
       (writeShellScriptBin "waybar-recording" (builtins.readFile ./bin/waybar-recording))
       (writeShellScriptBin "waybar-systemd" (builtins.readFile ./bin/waybar-systemd))
       (writeShellScriptBin "waybar-usbguard" (builtins.readFile ./bin/waybar-usbguard))
+      (writeShellScriptBin "waybar-wluma" (builtins.readFile ./bin/waybar-wluma))
       (writeShellScriptBin "waybar-yubikey" (builtins.readFile ./bin/waybar-yubikey))
       bash
       coreutils
@@ -36,6 +37,7 @@ let
       wrapProgram $out/bin/waybar-recording     --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-systemd       --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-usbguard      --prefix PATH : $out/bin
+      wrapProgram $out/bin/waybar-wluma         --prefix PATH : $out/bin
       wrapProgram $out/bin/waybar-yubikey       --prefix PATH : $out/bin
     '';
   };
@@ -72,7 +74,7 @@ in
           "cpu"
           "memory"
           "disk"
-          "backlight"
+          "custom/backlight"
           "sway/language"
           "battery"
           "clock"
@@ -203,10 +205,11 @@ in
           };
         };
 
-        backlight = {
-          format = "<span foreground='#928374'>{icon}</span> {percent}%";
-          format-icons = [ "" ];
-          tooltip = false;
+        "custom/backlight" = {
+          exec = "${app}/bin/waybar-wluma";
+          format = "<span foreground='#928374'></span> {text}%";
+          return-type = "json";
+          restart-interval = 1;
         };
 
         "sway/language" = {
@@ -341,7 +344,7 @@ in
         #cpu,
         #disk,
         #memory,
-        #backlight,
+        #custom-backlight,
         #battery,
         #clock {
           padding: 0 6px;
@@ -359,7 +362,7 @@ in
           margin-left: -1000000px;
         }
 
-        #backlight,
+        #custom-backlight,
         #battery,
         #clock,
         #cpu,

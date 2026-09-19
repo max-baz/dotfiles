@@ -1,0 +1,40 @@
+#!/bin/sh
+
+wluma watch --json | while IFS= read -r status; do
+    printf '%s\n' "$status" | jq -c --arg output "$WAYBAR_OUTPUT_NAME" '
+        def value:
+            if . == null then "-" else tostring end;
+        def metric($suffix):
+            if . == null then "-" else "\(.)\($suffix)" end;
+
+        ([.outputs[] | select(.name == $output)][0] // {}) as $current |
+        (.outputs | map(
+            "\(.name)\n" +
+            "  Type: \(.type | value)\n" +
+            "  Capturer: \(.capturer | value)\n" +
+            "  Luma: \(.luma | metric("%"))\n" +
+            "  Brightness: \(.brightness | metric("%"))\n" +
+            "  Dim: \(.dim | metric("%"))\n" +
+            "  Temperature: \(.temperature | metric("K"))\n" +
+            "  State: \(.state | value)"
+        ) | join("\n\n")) as $outputs |
+        {
+            text: (
+                ($current.brightness // "?" | tostring) +
+                (if (($current.dim // 0) > 0) then "-\($current.dim)" else "" end)
+            ),
+            tooltip: (
+                "ALS\n" +
+                "  Type: \(.als.type | value)\n" +
+                "  Value: \(.als.value | value)\n\n" +
+                "Power\n" +
+                "  Source: \(.idle.power_source | value)\n" +
+                "  Idle state: \(.idle.state | value)\n" +
+                "  Enabled: \(.idle.enabled | value)\n" +
+                "  Timeout: \(.idle.timeout | metric("s"))\n" +
+                "  Brightness: \(.idle.brightness | metric("%"))\n\n" +
+                "Outputs\n" + $outputs
+            )
+        }
+    '
+done

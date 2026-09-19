@@ -220,165 +220,172 @@
           };
 
           bindkeysToCode = true;
-          keybindings = let win = "Mod4+Alt"; hyper = "Mod4"; in {
-            # Terminal
-            "${hyper}+Return" = "exec cglaunch --term";
-            "${hyper}+XF86MonBrightnessDown" = "exec cglaunch --term";
-            "${win}+Return" = "exec kitty --config NONE";
-            "${win}+Shift+Return" = "exec kitty --config NONE /bin/bash";
+          keybindings =
+            let
+              win = "Mod4+Alt";
+              hyper = "Mod4";
+              wluma = property: change: "exec wluma set ${property} \"$(swaymsg -t get_workspaces -r | jq -r '.[] | select(.focused).output')\" ${change}";
+              moveTo = workspace: "move container to ${workspace}, ${workspace}";
+            in
+            {
+              # Terminal
+              "${hyper}+Return" = "exec cglaunch --term";
+              "${win}+Return" = "exec kitty --config NONE";
+              "${win}+Shift+Return" = "exec kitty --config NONE /bin/bash";
 
-            # Launcher
-            "${hyper}+equal" = "exec cgtoggle qalculate-gtk";
-            "${hyper}+d" = "exec cgtoggle wldash";
-            "${hyper}+n" = "exec cgtoggle network-dmenu";
-            "${hyper}+p" = "exec 'wl-clipboard-manager lock; cglaunch passmenu -p pass; wl-clipboard-manager unlock'";
-            "${win}+p" = "exec cgtoggle pass-gen";
-            "${hyper}+m" = "exec cgtoggle udiskie-dmenu";
-            "${hyper}+grave" = "exec cgtoggle wl-clipboard-manager dmenu";
-            "${hyper}+Backspace" = "exec cgtoggle emoji-dmenu";
-            "${hyper}+XF86MonBrightnessUp" = "exec cgtoggle emoji-dmenu";
-            "${hyper}+Escape" = "exec cglaunch screenshot-area";
-            "${win}+Escape" = "exec cglaunch record-area";
-            "Print" = "exec cglaunch screenshot-area";
-            "${win}+Print" = "exec cglaunch record-area";
-            "${win}+i" = "exec cglaunch ${lib.getExe pkgs.hyprpicker} -al";
+              # Launcher
+              "${hyper}+equal" = "exec cgtoggle qalculate-gtk";
+              "${hyper}+d" = "exec cgtoggle wldash";
+              "${hyper}+n" = "exec cgtoggle network-dmenu";
+              "${hyper}+p" = "exec 'wl-clipboard-manager lock; cglaunch passmenu -p pass; wl-clipboard-manager unlock'";
+              "${win}+p" = "exec cgtoggle pass-gen";
+              "${hyper}+m" = "exec cgtoggle udiskie-dmenu";
+              "${hyper}+grave" = "exec cgtoggle wl-clipboard-manager dmenu";
+              "${hyper}+Backspace" = "exec cgtoggle emoji-dmenu";
+              "${hyper}+Escape" = "exec cglaunch screenshot-area";
+              "${win}+Escape" = "exec cglaunch record-area";
+              "Print" = "exec cglaunch screenshot-area";
+              "${win}+Print" = "exec cglaunch record-area";
+              "${win}+i" = "exec cglaunch ${lib.getExe pkgs.hyprpicker} -al";
 
-            # Kill focused window
-            "${win}+q" = "kill";
+              # Kill focused window
+              "${win}+q" = "kill";
 
-            # Change focus
-            "${hyper}+h" = "focus left";
-            "${hyper}+j" = "focus down";
-            "${hyper}+k" = "focus up";
-            "${hyper}+l" = "focus right";
+              # Change focus
+              "${hyper}+h" = "focus left";
+              "${hyper}+j" = "focus down";
+              "${hyper}+k" = "focus up";
+              "${hyper}+l" = "focus right";
 
-            # Move focused window
-            "${win}+h" = "move left";
-            "${win}+j" = "move down";
-            "${win}+k" = "move up";
-            "${win}+l" = "move right";
+              # Move focused window
+              "${win}+h" = "move left";
+              "${win}+j" = "move down";
+              "${win}+k" = "move up";
+              "${win}+l" = "move right";
 
-            # Enter fullscreen mode
-            "${hyper}+f" = "fullscreen";
-            "${win}+f" = "exec pkill -USR1 waybar";
+              # Enter fullscreen mode
+              "${hyper}+f" = "fullscreen";
+              "${win}+f" = "exec pkill -USR1 waybar";
 
-            # Container layout: split
-            "${hyper}+e" = "layout toggle split";
+              # Container layout: split
+              "${hyper}+e" = "layout toggle split";
 
-            # Container layout: tabbed
-            "${hyper}+w" = "layout tabbed";
+              # Container layout: tabbed
+              "${hyper}+w" = "layout tabbed";
 
-            # Split
-            "${hyper}+s" = "split toggle";
+              # Split
+              "${hyper}+s" = "split toggle";
 
-            # Focus the parent container
-            "${hyper}+u" = "focus parent";
+              # Focus the parent container
+              "${hyper}+u" = "focus parent";
 
-            # Focus the child container
-            "${hyper}+i" = "focus child";
+              # Focus the child container
+              "${hyper}+i" = "focus child";
 
-            # Toggle tiling / floating
-            "${win}+space" = "floating toggle";
+              # Toggle tiling / floating
+              "${win}+space" = "floating toggle";
 
-            # Make the currently focused window a scratchpad
-            "${win}+minus" = "move scratchpad";
+              # Make the currently focused window a scratchpad
+              "${win}+minus" = "move scratchpad";
 
-            # Show the first scratchpad window
-            "${hyper}+minus" = "scratchpad show";
+              # Show the first scratchpad window
+              "${hyper}+minus" = "scratchpad show";
 
-            # Change focus between tiling / floating windows
-            "Alt+space" = "focus mode_toggle";
+              # Change focus between tiling / floating windows
+              "Alt+space" = "focus mode_toggle";
 
-            # Notification actions
-            "${hyper}+q" = "exec swaync-client --close-all";
+              # Notification actions
+              "${hyper}+q" = "exec swaync-client --close-all";
 
-            # Brightness control
-            "--locked XF86MonBrightnessUp" = "exec brightnessctl set -- +1%";
-            "--locked Shift+XF86MonBrightnessUp" = "exec brightnessctl set -- +5%";
-            "--locked XF86MonBrightnessDown" = "exec brightnessctl set -- -1%";
-            "--locked Shift+XF86MonBrightnessDown" = "exec brightnessctl set -- -5%";
+              # Brightness control
+              "--locked XF86MonBrightnessUp" = wluma "brightness" "+1%";
+              "--locked XF86MonBrightnessDown" = wluma "brightness" "-1%";
+              "--locked Shift+XF86MonBrightnessUp" = wluma "dim" "-1%";
+              "--locked Shift+XF86MonBrightnessDown" = wluma "dim" "+1%";
+              "--locked ${hyper}+XF86MonBrightnessUp" = wluma "temperature" "+100K";
+              "--locked ${hyper}+XF86MonBrightnessDown" = wluma "temperature" "-100K";
 
-            # Media control
-            "--locked XF86AudioPlay" = "exec playerctl --player playerctld play-pause";
-            "--locked XF86AudioNext" = "exec playerctl --player playerctld next";
-            "--locked XF86AudioPrev" = "exec playerctl --player playerctld previous";
-            "--locked ${hyper}+Up" = "exec playerctl --player playerctld play-pause";
-            "--locked ${hyper}+Down" = "exec playerctl --player playerctld play-pause";
-            "--locked ${hyper}+Left" = "exec playerctl --player playerctld previous";
-            "--locked ${hyper}+Right" = "exec playerctl --player playerctld next";
+              # Media control
+              "--locked XF86AudioPlay" = "exec playerctl --player playerctld play-pause";
+              "--locked XF86AudioNext" = "exec playerctl --player playerctld next";
+              "--locked XF86AudioPrev" = "exec playerctl --player playerctld previous";
+              "--locked ${hyper}+Up" = "exec playerctl --player playerctld play-pause";
+              "--locked ${hyper}+Down" = "exec playerctl --player playerctld play-pause";
+              "--locked ${hyper}+Left" = "exec playerctl --player playerctld previous";
+              "--locked ${hyper}+Right" = "exec playerctl --player playerctld next";
 
-            "--locked XF86AudioMute" = "exec audio output-mute";
-            "--locked XF86AudioRaiseVolume" = "exec audio output-volume-up";
-            "--locked XF86AudioLowerVolume" = "exec audio output-volume-down";
-            "--locked ${win}+Up" = "exec audio output-mute";
-            "--locked ${win}+Down" = "exec audio output-mute";
-            "--locked ${win}+Right" = "exec audio output-volume-up";
-            "--locked ${win}+Left" = "exec audio output-volume-down";
-            "--locked ${win}+Shift+Up" = "exec audio input-mute";
-            "--locked ${win}+Shift+Down" = "exec audio input-mute";
-            "--locked ${win}+Shift+Right" = "exec audio input-volume-up";
-            "--locked ${win}+Shift+Left" = "exec audio input-volume-down";
+              "--locked XF86AudioMute" = "exec audio output-mute";
+              "--locked XF86AudioRaiseVolume" = "exec audio output-volume-up";
+              "--locked XF86AudioLowerVolume" = "exec audio output-volume-down";
+              "--locked ${win}+Up" = "exec audio output-mute";
+              "--locked ${win}+Down" = "exec audio output-mute";
+              "--locked ${win}+Right" = "exec audio output-volume-up";
+              "--locked ${win}+Left" = "exec audio output-volume-down";
+              "--locked ${win}+Shift+Up" = "exec audio input-mute";
+              "--locked ${win}+Shift+Down" = "exec audio input-mute";
+              "--locked ${win}+Shift+Right" = "exec audio input-volume-up";
+              "--locked ${win}+Shift+Left" = "exec audio input-volume-down";
 
-            # Reload the configuration file
-            "${win}+r" = "reload";
+              # Reload the configuration file
+              "${win}+r" = "reload";
 
-            # Jump between windows
-            "${hyper}+Tab" = "exec swayr switch-to-urgent-or-lru-window";
+              # Jump between windows
+              "${hyper}+Tab" = "exec swayr switch-to-urgent-or-lru-window";
 
-            # Switch to workspace using number row
-            "${hyper}+1" = "${workspace1}";
-            "${hyper}+2" = "${workspace2}";
-            "${hyper}+3" = "${workspace3}";
-            "${hyper}+4" = "${workspace4}";
-            "${hyper}+5" = "${workspace5}";
-            "${hyper}+6" = "${workspace6}";
-            "${hyper}+7" = "${workspace7}";
-            "${hyper}+8" = "${workspace8}";
-            "${hyper}+9" = "${workspace9}";
-            "${hyper}+0" = "${workspace10}";
+              # Switch to workspace using number row
+              "${hyper}+1" = "${workspace1}";
+              "${hyper}+2" = "${workspace2}";
+              "${hyper}+3" = "${workspace3}";
+              "${hyper}+4" = "${workspace4}";
+              "${hyper}+5" = "${workspace5}";
+              "${hyper}+6" = "${workspace6}";
+              "${hyper}+7" = "${workspace7}";
+              "${hyper}+8" = "${workspace8}";
+              "${hyper}+9" = "${workspace9}";
+              "${hyper}+0" = "${workspace10}";
 
-            # Switch to workspace using keypad
-            "${hyper}+KP_1" = "${workspace1}";
-            "${hyper}+KP_2" = "${workspace2}";
-            "${hyper}+KP_3" = "${workspace3}";
-            "${hyper}+KP_4" = "${workspace4}";
-            "${hyper}+KP_5" = "${workspace5}";
-            "${hyper}+KP_6" = "${workspace6}";
-            "${hyper}+KP_7" = "${workspace7}";
-            "${hyper}+KP_8" = "${workspace8}";
-            "${hyper}+KP_9" = "${workspace9}";
-            "${hyper}+KP_0" = "${workspace10}";
+              # Switch to workspace using keypad
+              "${hyper}+KP_1" = "${workspace1}";
+              "${hyper}+KP_2" = "${workspace2}";
+              "${hyper}+KP_3" = "${workspace3}";
+              "${hyper}+KP_4" = "${workspace4}";
+              "${hyper}+KP_5" = "${workspace5}";
+              "${hyper}+KP_6" = "${workspace6}";
+              "${hyper}+KP_7" = "${workspace7}";
+              "${hyper}+KP_8" = "${workspace8}";
+              "${hyper}+KP_9" = "${workspace9}";
+              "${hyper}+KP_0" = "${workspace10}";
 
-            # Move window to workspace using number row
-            "${win}+1" = "move container to ${workspace1}";
-            "${win}+2" = "move container to ${workspace2}";
-            "${win}+3" = "move container to ${workspace3}";
-            "${win}+4" = "move container to ${workspace4}";
-            "${win}+5" = "move container to ${workspace5}";
-            "${win}+6" = "move container to ${workspace6}";
-            "${win}+7" = "move container to ${workspace7}";
-            "${win}+8" = "move container to ${workspace8}";
-            "${win}+9" = "move container to ${workspace9}";
-            "${win}+0" = "move container to ${workspace10}";
+              # Move window to workspace using number row
+              "${win}+1" = moveTo workspace1;
+              "${win}+2" = moveTo workspace2;
+              "${win}+3" = moveTo workspace3;
+              "${win}+4" = moveTo workspace4;
+              "${win}+5" = moveTo workspace5;
+              "${win}+6" = moveTo workspace6;
+              "${win}+7" = moveTo workspace7;
+              "${win}+8" = moveTo workspace8;
+              "${win}+9" = moveTo workspace9;
+              "${win}+0" = moveTo workspace10;
 
-            # Move window to workspace using keypad
-            "${win}+KP_1" = "move container to ${workspace1}";
-            "${win}+KP_2" = "move container to ${workspace2}";
-            "${win}+KP_3" = "move container to ${workspace3}";
-            "${win}+KP_4" = "move container to ${workspace4}";
-            "${win}+KP_5" = "move container to ${workspace5}";
-            "${win}+KP_6" = "move container to ${workspace6}";
-            "${win}+KP_7" = "move container to ${workspace7}";
-            "${win}+KP_8" = "move container to ${workspace8}";
-            "${win}+KP_9" = "move container to ${workspace9}";
-            "${win}+KP_0" = "move container to ${workspace10}";
+              # Move window to workspace using keypad
+              "${win}+KP_1" = moveTo workspace1;
+              "${win}+KP_2" = moveTo workspace2;
+              "${win}+KP_3" = moveTo workspace3;
+              "${win}+KP_4" = moveTo workspace4;
+              "${win}+KP_5" = moveTo workspace5;
+              "${win}+KP_6" = moveTo workspace6;
+              "${win}+KP_7" = moveTo workspace7;
+              "${win}+KP_8" = moveTo workspace8;
+              "${win}+KP_9" = moveTo workspace9;
+              "${win}+KP_0" = moveTo workspace10;
 
-            # Modes
-            "${win}+a" = "mode $mode_audio";
-            "${hyper}+r" = "mode $mode_resize";
-            "${win}+e" = "mode $mode_system";
-            "${win}+m" = "mode $mode_workspaces_monitors";
-          };
+              # Modes
+              "${win}+a" = "mode $mode_audio";
+              "${hyper}+r" = "mode $mode_resize";
+              "${win}+e" = "mode $mode_system";
+              "${win}+m" = "mode $mode_workspaces_monitors";
+            };
 
           startup = [
             {
