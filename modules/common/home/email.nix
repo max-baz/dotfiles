@@ -287,7 +287,7 @@
         address = "notmuch@localhost";
         aerc = {
           enable = true;
-          extraAccounts.source = "notmuch://~/.mail";
+          extraAccounts.source = "notmuch://";
           extraBinds.messages."r" = '':reply -aqA {{index (.Filename | split ("/")) 4}}<Enter>'';
           extraBinds.view."r" = '':reply -aqA {{index (.Filename | split ("/")) 4}}<Enter>'';
         };

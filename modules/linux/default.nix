@@ -7,6 +7,7 @@
   imports = [
     ../common/nixos
     ./android.nix
+    ./audio.nix
     ./bluetooth.nix
     ./boot.nix
     ./btrfs.nix

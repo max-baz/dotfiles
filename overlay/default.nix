@@ -176,13 +176,13 @@
 
       parcel-host = prev.stdenv.mkDerivation rec {
         pname = "parcel-host";
-        version = "1.0.2";
+        version = "1.0.7";
 
         src = prev.fetchFromGitHub {
           owner = "parcel-pm";
           repo = "parcel";
           rev = "v${version}";
-          hash = "sha256-UlF0avdoX7/Msx66nNuLPOCRSNE5PXRF4ELBYYtcFIU=";
+          hash = "sha256-MyBecvP03Xre12F83bogdm5iK7pK1ugdjeAVyfnG1iI=";
         };
 
         dontBuild = true;

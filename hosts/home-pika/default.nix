@@ -3,6 +3,7 @@ let
   system = "x86_64-linux";
   user = "max";
   moduleArgs = mkModuleArgs system;
+  audioPkgs = inputs.nixpkgs-audio.legacyPackages.${system};
 in
 inputs.nixpkgs.lib.nixosSystem {
   specialArgs = moduleArgs;
@@ -17,6 +18,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/hardware/intel-graphics.nix
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../modules/hardware/secure-boot.nix
+    { boot.kernelPackages = audioPkgs.linuxPackages_7_1; }
     {
       networking.hostName = "home-pika";
       services.usbguard.enable = true;
