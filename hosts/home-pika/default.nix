@@ -19,6 +19,7 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/hardware/secure-boot.nix
     {
       networking.hostName = "home-pika";
+      services.usbguard.enable = true;
 
       home-manager = {
         extraSpecialArgs = moduleArgs // { isNixOS = true; };
