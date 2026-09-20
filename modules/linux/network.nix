@@ -1,7 +1,7 @@
 {
   services.resolved = {
     enable = true;
-    settings.Resolve.DNSSEC = false;
+    settings.Resolve.DNSSEC = "allow-downgrade";
   };
 
   networking = {
