@@ -27,18 +27,29 @@
       });
 
       wluma = prev.wluma.overrideAttrs (old: rec {
-        version = "5.0.1";
+        version = "5.0.2";
         src = prev.fetchFromGitHub {
           owner = "max-baz";
           repo = "wluma";
           rev = version;
-          hash = "sha256-zhqmDUjdv62obf8WF4PAfdPhIpIeFFveOEDAq46PSWc=";
+          hash = "sha256-llVhwOm7nlQtDTqEuZiUA0Z6r3+56CA1Q8YJPp5Bysk=";
         };
         cargoDeps = prev.rustPlatform.fetchCargoVendor {
           inherit src;
           hash = "sha256-SQwtziGI8/RLynrj6dqTsqqmBlYFU/wfnBfrkyiYK0k=";
         };
         buildInputs = old.buildInputs ++ [ prev.pipewire ];
+      });
+
+      yubikey-touch-detector = prev.yubikey-touch-detector.overrideAttrs (_old: rec {
+        version = "1.15.0";
+        src = prev.fetchFromGitHub {
+          owner = "max-baz";
+          repo = "yubikey-touch-detector";
+          rev = version;
+          hash = "sha256-GaahrYx5ySUIAM073JknQGPwC2pw2VXj3D25sEZANJk=";
+        };
+        vendorHash = "sha256-Uvybz2i2i/EWJvmvlb4VcJo/2SNaDAuj8t997sxlvtY=";
       });
 
       joypixels = prev.joypixels.overrideAttrs (_old: {
