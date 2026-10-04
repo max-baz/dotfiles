@@ -27,12 +27,12 @@
       });
 
       wluma = prev.wluma.overrideAttrs (old: rec {
-        version = "5.0.2";
+        version = "5.0.4";
         src = prev.fetchFromGitHub {
           owner = "max-baz";
           repo = "wluma";
           rev = version;
-          hash = "sha256-llVhwOm7nlQtDTqEuZiUA0Z6r3+56CA1Q8YJPp5Bysk=";
+          hash = "sha256-74DUlFkLK4RncESgKTmUfLH6aZPnDPzrISpJ8OKc0sg=";
         };
         cargoDeps = prev.rustPlatform.fetchCargoVendor {
           inherit src;
