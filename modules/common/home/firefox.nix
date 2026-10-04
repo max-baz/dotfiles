@@ -5,10 +5,17 @@
     nativeMessagingHosts = with pkgs; [ ff2mpv-rust ];
     profiles.default = {
       userChrome = ''
-        #sidebar-box[sidebarcommand^="containertabs"] #sidebar-header { display: none; }
         #navigator-toolbox[fullscreenShouldAnimate] { transition: none !important; }
+
         .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged] { background-image: none !important; }
-        .tabbrowser-tab > .tab-stack > .tab-background { flex-direction: row !important; }
+
+        .tabbrowser-tab[usercontextid] .tab-context-line {
+          position: absolute !important;
+          inset: 7px auto 10px 0px !important;
+          width: 2px !important;
+          height: auto !important;
+          background: var(--identity-stroke-color) border-box border-box !important;
+        }
       '';
 
       extensions.packages = with firefox-addons; [
