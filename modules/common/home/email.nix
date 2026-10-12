@@ -264,7 +264,7 @@
 
       notmuch = {
         enable = true;
-        new = {
+        settings.new = {
           ignore = [
             ".uidvalidity"
             ".mbsyncstate"
