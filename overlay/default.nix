@@ -61,6 +61,52 @@
         };
       });
 
+      mindwtr = prev.stdenv.mkDerivation rec {
+        pname = "mindwtr";
+        version = "1.3.6";
+
+        src = prev.fetchurl {
+          url = "https://github.com/dongdongbh/Mindwtr/releases/download/v${version}/mindwtr_${version}_amd64.deb";
+          hash = "sha256-ELk7woTaOdc5ZcV+pCixkBt44+BWzJHqMqDvzr9+1vk=";
+        };
+
+        nativeBuildInputs = with prev; [
+          dpkg
+          autoPatchelfHook
+          wrapGAppsHook3
+        ];
+        buildInputs = with prev; [
+          stdenv.cc.cc.lib
+          gtk3
+          webkitgtk_4_1
+          alsa-lib
+        ];
+        runtimeDependencies = [ prev.libappindicator-gtk3 ];
+
+        unpackPhase = ''
+          runHook preUnpack
+          dpkg-deb -x "$src" .
+          runHook postUnpack
+        '';
+
+        dontBuild = true;
+
+        installPhase = ''
+          runHook preInstall
+          mkdir -p $out
+          cp -r usr/bin usr/share $out/
+          runHook postInstall
+        '';
+
+        meta = with prev.lib; {
+          description = "GTD productivity system";
+          homepage = "https://github.com/dongdongbh/Mindwtr";
+          license = licenses.agpl3Only;
+          platforms = [ "x86_64-linux" ];
+          mainProgram = "mindwtr";
+        };
+      };
+
       pik = prev.rustPlatform.buildRustPackage rec {
         pname = "pik";
         version = "0.9.0";

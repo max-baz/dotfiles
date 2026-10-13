@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    mindwtr
     sleek-todo
     todo-txt-cli
   ];
