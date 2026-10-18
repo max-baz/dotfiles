@@ -43,8 +43,6 @@ alias ll='ls -l'
 alias utc='env TZ=UTC date'
 alias gpg-change-card='gpg-connect-agent "scd serialno" "learn --force" /bye'
 alias yd='yt-dlp'
-alias ws='wormhole-rs tx'
-alias wr='wormhole-rs rx'
 
 compdef trash-put=rm
 compdef w3mman=man

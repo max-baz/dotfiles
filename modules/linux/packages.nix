@@ -9,7 +9,6 @@
     hyprpicker
     iptables-nftables-compat
     krita
-    magic-wormhole-rs
     meld
     nftables
     pam_u2f

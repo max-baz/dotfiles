@@ -25,7 +25,6 @@
     jq
     just
     libnotify
-    magic-wormhole-rs
     maximbaz-scripts
     netcat-openbsd
     # nftables
@@ -61,6 +60,7 @@
     syncthing
     # systembus-notify
     # tailspin
+    tailcat
     teehee
     tig
     # trash-cli

@@ -65,7 +65,6 @@
     glib
     go
     jq
-    magic-wormhole-rs
     maximbaz-scripts
     pass
     perlPackages.vidir
