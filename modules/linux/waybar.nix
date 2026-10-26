@@ -48,6 +48,13 @@ in
 
     programs.waybar = {
       enable = true;
+      package = pkgs.waybar.overrideAttrs (old: {
+        postPatch = (old.postPatch or "") + ''
+          substituteInPlace src/modules/clock.cpp \
+            --replace-fail 'os << fmt_lib::vformat(m_locale_, fmt, fmt_lib::make_format_args(zt));' \
+            'auto city = std::string(tz->name()); city = city.substr(city.find_last_of("/") + 1); city = std::regex_replace(city, std::regex("_"), " "); os << city << ": " << fmt_lib::vformat(m_locale_, fmt, fmt_lib::make_format_args(zt));'
+        '';
+      });
       systemd.enable = true;
 
       settings.mainBar = {
@@ -166,6 +173,7 @@ in
 
         clock = {
           tooltip-format = "{calendar}\n\n<span color='#ebdbb2'>{tz_list}</span>";
+          timezone-tooltip-format = "{:%a, %d %b %H:%M}";
           format = "<span foreground='#928374'></span> {:%a, %d %b  <span foreground='#928374'></span> %H:%M}";
           timezones = [ "Europe/Copenhagen" "Australia/Melbourne" ];
           calendar = {
