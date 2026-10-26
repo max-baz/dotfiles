@@ -401,7 +401,7 @@
               always = true;
             }
             {
-              command = "cggrep sleek-todo || cglaunch sleek-todo";
+              command = "cggrep mindwtr || cglaunch mindwtr";
               always = true;
             }
           ];
