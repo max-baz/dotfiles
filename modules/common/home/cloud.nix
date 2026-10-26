@@ -1,7 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, stable, ... }: {
   home.packages = with pkgs; [
-    awscli
-    azure-cli
+    stable.awscli
+    stable.azure-cli
   ];
 }
 

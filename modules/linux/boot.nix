@@ -17,10 +17,6 @@
     ];
     consoleLogLevel = 3;
     plymouth.enable = true;
-    initrd = {
-      systemd.enable = true;
-      verbose = false;
-    };
   };
 
   systemd.mounts = [{

@@ -18,7 +18,12 @@ inputs.nixpkgs.lib.nixosSystem {
     ../../modules/hardware/intel-graphics.nix
     inputs.lanzaboote.nixosModules.lanzaboote
     ../../modules/hardware/secure-boot.nix
-    { boot.kernelPackages = audioPkgs.linuxPackages_7_1; }
+    {
+      boot.kernelPackages = audioPkgs.linuxPackages_7_1;
+      nixpkgs.overlays = [
+        (_: _: { inherit (audioPkgs) aggregateModules; })
+      ];
+    }
     {
       networking.hostName = "home-pika";
       services.usbguard.enable = true;
