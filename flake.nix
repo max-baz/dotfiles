@@ -20,6 +20,11 @@
     unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixgl.url = "github:nix-community/nixGL";
 
+    wluma-src = {
+      url = "github:max-baz/wluma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -82,6 +87,7 @@
       };
       mkModuleArgs = system: {
         nixgl = inputs.nixgl;
+        wluma-src = inputs.wluma-src;
         stable = import inputs.stable { inherit system; config = nixpkgsConfig; };
         unstable-small = import inputs.unstable-small { inherit system; config = nixpkgsConfig; };
         util = import ./util;
