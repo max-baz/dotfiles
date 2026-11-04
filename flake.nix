@@ -63,7 +63,7 @@
     dotfiles-private.url = "git+file:///home/max/.dotfiles-private";
 
     waysip = {
-      url = "github:waycrate/waysip";
+      url = "github:waycrate/waysip/6b025ecba1e06e76631ce7d1035af67fd13b3a00";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
