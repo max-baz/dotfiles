@@ -5,6 +5,7 @@
     [matching]
     "calibre-gui" = ""
     "chromium" = ""
+    "chromium-browser" = ""
     "code" = ""
     "dmenu" = ""
     "dmenu-clipboard" = ""
@@ -16,6 +17,7 @@
     "krita" = ""
     "org.gnumeric.gnumeric" = ""
     "abiword" = ""
+    "mindwtr" = ""
     "mpv" = ""
     "aerc" = ""
     "org.pwmt.zathura" = ""
