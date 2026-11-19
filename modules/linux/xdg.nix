@@ -3,7 +3,8 @@
     enable = true;
     settings = {
       screencast = {
-        chooser_type = "none";
+        chooser_type = "simple";
+        chooser_cmd = "${lib.getExe pkgs.slurp} -f %o -or";
         exec_before = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-on --skip-wait";
         exec_after = "${lib.getExe' pkgs.swaynotificationcenter "swaync-client"} --dnd-off --skip-wait";
       };
