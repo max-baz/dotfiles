@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   nixpkgs.overlays = [
-    (final: prev: {
+    (final: prev: (import ../apps { pkgs = final; }) // {
       input-fonts = prev.input-fonts.overrideAttrs (_old: {
         src = prev.fetchzip {
           # This URL is too long for fetchzip, and returns non-reproducible zips with new sha256 every time ☹️
@@ -322,7 +322,14 @@
           install -Dm755 $src/* -t $out/bin/
           install -Dm755 $src/dmenu $out/bin/dmenu-wl
         '';
-        postFixup = ''
+        postFixup = prev.lib.optionalString prev.stdenv.isLinux ''
+          wrapProgram $out/bin/screenshot-area \
+            --prefix PATH : ${prev.lib.makeBinPath [
+              final.wayfreeze
+              prev.swappy
+              prev.systemd
+            ]}
+        '' + ''
           for script in $out/bin/*; do 
             wrapProgram $script \
               --suffix PATH : /run/wrappers/bin/ \

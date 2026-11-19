@@ -1,30 +1,46 @@
 #!/bin/sh
 
-mkdir -p /tmp/screenshots
-cd /tmp/screenshots
+service=sway-inactive-windows-transparency.service
+transparency_active=false
+child=
+directory=$(mktemp -d "${XDG_RUNTIME_DIR:?}/screenshot-area.XXXXXX") || exit 1
 
-systemctl --user stop sway-inactive-windows-transparency.service
+restore_transparency() {
+    if "$transparency_active"; then
+        systemctl --user start "$service" || return 1
+        transparency_active=false
+    fi
+}
 
-hyprpicker -rz &
-sleep 0.2 # it needs time to freeze the screen...
+cleanup() {
+    status=$?
+    trap - EXIT
+    if [ -n "$child" ]; then
+        kill -TERM "$child" 2>/dev/null
+        wait "$child" 2>/dev/null
+    fi
+    restore_transparency
+    rm -f "$directory/area.png"
+    rmdir "$directory"
+    exit "$status"
+}
 
-swaymsg seat '*' hide_cursor 1 # hide cursor...
-sleep 0.2 # let it disappear...
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+trap 'exit 129' HUP
 
-cursor_delay=$(swaymsg -t get_config -p | rg -oP '(?<=hide_cursor )\d+')
-geometry="$(waysip -s '#ff3f3faf' -w 2 -d)"
-
-if [ -n "$geometry" ]; then
-    grim -g "$geometry" -t png area.png
-else
-    grim -t png area.png
+if systemctl --user is-active --quiet "$service"; then
+    transparency_active=true
+    systemctl --user stop "$service" || exit 1
 fi
 
-kill $!
-swaymsg seat '*' hide_cursor "$cursor_delay" # restore cursor...
+wayfreeze --selector 'waysip -s "#ff3f3faf" -w 2 -d' --output "$directory/area.png" &
+child=$!
+wait "$child"
+status=$?
+child=
+[ "$status" -eq 0 ] || exit "$status"
 
-[ -f area.png ] && swappy -f area.png
-
-systemctl --user start sway-inactive-windows-transparency.service
-
-rm -f screen.png area.png
+restore_transparency || exit 1
+swappy -f "$directory/area.png"

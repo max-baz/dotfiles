@@ -32,6 +32,7 @@
     usbguard
     vault-bin
     vimiv-qt
+    wayfreeze
     waysip
     wev
     wf-recorder

@@ -1,0 +1,20 @@
+[package]
+name = "wayfreeze"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89"
+description = "Frozen region screenshots with HDR-to-SDR capture for Sway"
+license = "ISC"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+libc = "0.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+signal-hook = "0.4"
+tempfile = "3"
+wayland-client = "0.31"
+wayland-protocols = { version = "0.32", features = ["client"] }
+wayland-protocols-wlr = { version = "0.3", features = ["client"] }
